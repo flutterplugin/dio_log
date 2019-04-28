@@ -41,17 +41,18 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
         options.queryParameters[HttpLogInterceptor.reqTimeKey]));
 
     ///格式化返回时间
-    if (options.queryParameters[HttpLogInterceptor.resTimeKey] == null) {
+    var resTime = options.queryParameters[HttpLogInterceptor.resTimeKey];
+    if (resTime == null) {
       reqFail = true;
+      resTime = 0;
     }
     var responseTime = reqFail
         ? '请求失败'
-        : _getTimeStr(DateTime.fromMillisecondsSinceEpoch(
-            options.queryParameters[HttpLogInterceptor.resTimeKey] ?? 0));
+        : _getTimeStr(DateTime.fromMillisecondsSinceEpoch(resTime));
 
     ///计算请求耗时
     var duration =
-        '${options.queryParameters[HttpLogInterceptor.resTimeKey] ?? 0 - options.queryParameters[HttpLogInterceptor.reqTimeKey]}ms';
+        '${resTime - options.queryParameters[HttpLogInterceptor.reqTimeKey]}ms';
     if (reqFail) {
       duration = '遥遥无期';
     }
