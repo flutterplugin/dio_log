@@ -38,15 +38,11 @@ class _HttpLogWidgetState extends State<HttpLogWidget>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Hero(
-          tag: widget
-              .httpLog.options.queryParameters[HttpLogInterceptor.reqTimeKey],
-          child: Text(
-            widget.httpLog.options.path,
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Color(0xFF4a4a4a),
-            ),
+        title: Text(
+          widget.httpLog.options.path,
+          style: TextStyle(
+            fontSize: 16.0,
+            color: Color(0xFF4a4a4a),
           ),
         ),
         backgroundColor: Colors.white,
