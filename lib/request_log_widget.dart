@@ -16,17 +16,21 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
   TextEditingController _urlController;
   TextEditingController _cookieController;
   TextEditingController _paramController;
+  TextEditingController _bodyController;
   bool reqFail = false;
   @override
   void initState() {
     _urlController = TextEditingController();
     _cookieController = TextEditingController();
     _paramController = TextEditingController();
+    _bodyController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
+    _bodyController.dispose();
+    _paramController.dispose();
     _urlController.dispose();
     _cookieController.dispose();
     super.dispose();
@@ -73,6 +77,8 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
           _buildItem('responseTime', responseTime),
           _buildItem('duration', duration),
           _buildCopyItem('requestUrl', str.toString() ?? '', _urlController),
+          _buildCopyItem(
+              'body', options.data.toString() ?? '', _bodyController),
           _buildCopyItem('params', options.queryParameters.toString() ?? '',
               _paramController),
           _buildCopyItem(

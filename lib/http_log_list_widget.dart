@@ -39,7 +39,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
             )
           : ListView.builder(
               reverse: false,
-              itemCount: logMap.length,
+              itemCount: keys.length,
               itemBuilder: (BuildContext context, int index) {
                 HttpLog item = logMap[keys[index]];
                 return Card(
