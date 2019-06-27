@@ -56,10 +56,16 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
                       width: double.infinity,
                       padding: EdgeInsets.all(8.0),
                       child: Hero(
-                          tag: item.options
-                              .queryParameters[HttpLogInterceptor.reqTimeKey],
-                          child:
-                              Text(item.options.baseUrl + item.options.path)),
+                        tag: item.options
+                            .queryParameters[HttpLogInterceptor.reqTimeKey],
+                        child: Text(
+                          item.options.baseUrl + item.options.path,
+                          style: TextStyle(
+                              color: (item.response?.data == null)
+                                  ? Colors.red
+                                  : Colors.black),
+                        ),
+                      ),
                     ),
                   ),
                 );
