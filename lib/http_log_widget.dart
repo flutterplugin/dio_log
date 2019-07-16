@@ -1,4 +1,4 @@
-import 'package:dio_log/dio_log_export.dart';
+import 'package:dio_log/dio_log.dart';
 import 'package:flutter/material.dart';
 
 ///网络请求详情

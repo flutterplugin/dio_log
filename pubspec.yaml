@@ -1,8 +1,8 @@
 name: dio_log
-description: flutter dio http log.
-version: 0.0.1
-author:
-homepage:
+description: http requests log of dio 。This plugin helps you display log information for requests
+version: 1.0.3
+author: rich <dgsimle@sina.com>
+homepage: https://github.com/flutterplugin/dio_log
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: 2.1.2 #dio是一个强大的Dart Http请求库，支持Restful API、FormData、拦截器、请求取消、Cookie管理、文件上传/下载、超时、自定义适配器等 https://github.com/flutterchina/dio/blob/master/README-ZH.md
+  dio: ^2.0.0
 
 dev_dependencies:
   flutter_test:

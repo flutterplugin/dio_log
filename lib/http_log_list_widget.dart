@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
-import 'dio_log_export.dart';
+import 'dio_log.dart';
 
 ///网络请求日志列表
 class HttpLogListWidget extends StatefulWidget {

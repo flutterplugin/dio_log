@@ -1,4 +1,4 @@
-library dio_log_export;
+library dio_log;
 
 export 'error_log_widget.dart';
 export 'http_log_interceptor.dart';

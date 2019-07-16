@@ -45,19 +45,6 @@ class _ResponseLogWidgetState extends State<ResponseLogWidget> {
     json = json.replaceAll(RegExp(','), ',\n    ');
     return json;
   }
-
-  ///构建jsonView
-  Widget buildJsonView(String json) {
-    _findReCentLabel(json);
-  }
-
-  JsonLabel _findReCentLabel(String json) {
-    int position = -1;
-    position = json.indexOf(RegExp('{'));
-    if (position == 0) {
-      return JsonLabel.LeftObject;
-    }
-  }
 }
 
 enum JsonLabel {
