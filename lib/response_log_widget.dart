@@ -21,9 +21,11 @@ class _ResponseLogWidgetState extends State<ResponseLogWidget> {
       children: <Widget>[
         RaisedButton(
           onPressed: () {
+            var snackBar = SnackBar(content: Text('copy success'));
+            Scaffold.of(context).showSnackBar(snackBar);
             Clipboard.setData(ClipboardData(text: response?.data?.toString()));
           },
-          child: Text('复制结果'),
+          child: Text('copy'),
         ),
         Container(
           margin: EdgeInsets.all(12.0),

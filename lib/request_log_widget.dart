@@ -137,8 +137,10 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
               ),
             ),
             RaisedButton(
-              child: Text('复制'),
+              child: Text('copy'),
               onPressed: () {
+                var snackBar = SnackBar(content: Text('copy success'));
+                Scaffold.of(context).showSnackBar(snackBar);
                 Clipboard.setData(ClipboardData(text: value));
               },
             )
