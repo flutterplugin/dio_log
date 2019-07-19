@@ -23,9 +23,10 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
         title: Text(
           'request log',
           style: TextStyle(
-              fontSize: 18.0,
-              color: Color(0xFF4a4a4a),
-              fontWeight: FontWeight.bold),
+            fontSize: 14.0,
+            color: Color(0xFF4a4a4a),
+            fontWeight: FontWeight.normal,
+          ),
         ),
         backgroundColor: Colors.white,
         brightness: Brightness.light,
@@ -61,9 +62,10 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
                         child: Text(
                           item.options.baseUrl + item.options.path,
                           style: TextStyle(
-                              color: (item.response?.data == null)
-                                  ? Colors.red
-                                  : Colors.black),
+                            color: (item.response?.data == null)
+                                ? Colors.red
+                                : Colors.black,
+                          ),
                         ),
                       ),
                     ),

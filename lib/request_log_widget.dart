@@ -3,6 +3,8 @@ import 'package:dio_log/log_pool_manage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'json_view.dart';
+
 class RequestLogWidget extends StatefulWidget {
   final HttpLog httpLog;
 
@@ -83,6 +85,10 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
               _paramController),
           _buildCopyItem(
               'cookie', options.headers['cookie'] ?? '', _cookieController),
+          Text('Headers:'),
+          JsonView(options.headers),
+          Text('extra:'),
+          JsonView(options.extra),
         ],
       ),
     );
@@ -139,7 +145,8 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
             RaisedButton(
               child: Text('copy'),
               onPressed: () {
-                var snackBar = SnackBar(content: Text('copy success'));
+                var snackBar =
+                    SnackBar(content: Text('copy success to clipboard'));
                 Scaffold.of(context).showSnackBar(snackBar);
                 Clipboard.setData(ClipboardData(text: value));
               },

@@ -16,7 +16,7 @@ class _ErrorLogWidgetState extends State<ErrorLogWidget> {
     return Container(
       height: double.infinity,
       child: Center(
-        child: Text(widget.httpLog.err?.toString() ?? '请求正常'),
+        child: Text(widget.httpLog.err?.toString() ?? 'request success'),
       ),
     );
   }
