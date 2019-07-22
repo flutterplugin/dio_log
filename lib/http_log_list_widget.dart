@@ -21,11 +21,12 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '网络日志',
+          'request log',
           style: TextStyle(
-              fontSize: 18.0,
-              color: Color(0xFF4a4a4a),
-              fontWeight: FontWeight.bold),
+            fontSize: 14.0,
+            color: Color(0xFF4a4a4a),
+            fontWeight: FontWeight.normal,
+          ),
         ),
         backgroundColor: Colors.white,
         brightness: Brightness.light,
@@ -35,7 +36,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
       ),
       body: logMap.length < 1
           ? Center(
-              child: Text('没有收到网络日志'),
+              child: Text('no request log'),
             )
           : ListView.builder(
               reverse: false,
@@ -61,9 +62,10 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
                         child: Text(
                           item.options.baseUrl + item.options.path,
                           style: TextStyle(
-                              color: (item.response?.data == null)
-                                  ? Colors.red
-                                  : Colors.black),
+                            color: (item.response?.data == null)
+                                ? Colors.red
+                                : Colors.black,
+                          ),
                         ),
                       ),
                     ),
