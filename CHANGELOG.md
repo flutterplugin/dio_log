@@ -1,3 +1,5 @@
+## [v1.1.1] - 2019/7/22
+* add Screenshot
 ## [v1.1.0] - 2019/7/22
 * support jsonView look at json
 ## [v1.0.3] - 2019/7/16
