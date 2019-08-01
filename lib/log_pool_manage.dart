@@ -56,6 +56,11 @@ class LogPoolManage {
       });
     }
   }
+
+  void clear() {
+    logMap.clear();
+    keys.clear();
+  }
 }
 
 ///存放一个完整请求记录的类

@@ -33,6 +33,15 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
         centerTitle: true,
         elevation: 1.0,
         iconTheme: IconThemeData(color: Color(0xFF555555)),
+        actions: <Widget>[
+          RaisedButton(
+            onPressed: () {
+              LogPoolManage.getInstance().clear();
+              setState(() {});
+            },
+            child: Text('clear log'),
+          )
+        ],
       ),
       body: logMap.length < 1
           ? Center(
@@ -43,36 +52,52 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               itemCount: keys.length,
               itemBuilder: (BuildContext context, int index) {
                 HttpLog item = logMap[keys[index]];
-                return Card(
-                  margin: EdgeInsets.all(8.0),
-                  elevation: 1.0,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return HttpLogWidget(item);
-                      }));
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(8.0),
-                      child: Hero(
-                        tag: item.options
-                            .queryParameters[HttpLogInterceptor.reqTimeKey],
-                        child: Text(
-                          item.options.baseUrl + item.options.path,
-                          style: TextStyle(
-                            color: (item.response?.data == null)
-                                ? Colors.red
-                                : Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
+                return _buildItem(item);
               },
             ),
+    );
+  }
+
+  Widget _buildItem(HttpLog item) {
+    var options = item.options;
+
+    ///格式化请求时间
+    var requestTime = getTimeStr1(DateTime.fromMillisecondsSinceEpoch(
+        options.queryParameters[HttpLogInterceptor.reqTimeKey]));
+    return Card(
+      margin: EdgeInsets.all(8),
+      elevation: 6,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return HttpLogWidget(item);
+          }));
+        },
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'requestTime: $requestTime',
+                style: TextStyle(
+                  color:
+                      (item.response?.data == null) ? Colors.red : Colors.black,
+                ),
+              ),
+              Divider(height: 2),
+              Text(
+                'url:${item.options.baseUrl + item.options.path}',
+                style: TextStyle(
+                  color:
+                      (item.response?.data == null) ? Colors.red : Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

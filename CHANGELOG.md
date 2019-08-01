@@ -1,3 +1,7 @@
+## [v1.2.0] - 2019/8/01
+* add overlay_draggable_button(Global float window is easier to open HttpLogListWidget)
+* add clear log function at requestList
+* add display requestTime at requestList
 ## [v1.1.1] - 2019/7/22
 * add Screenshot
 ## [v1.1.0] - 2019/7/22

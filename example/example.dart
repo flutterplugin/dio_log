@@ -9,6 +9,9 @@ main() async {
 
   ///this is context of widget
   BuildContext context;
+  showDebugBtn(context);
+
+  ///or
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (context) => HttpLogListWidget(),
