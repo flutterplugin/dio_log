@@ -30,4 +30,9 @@ Navigator.of(context).push(
 ```
 
 ### Screenshot 
+<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_list.PNG" width="200">      
+<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_request.PNG" width="200">
+<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_response.PNG" width="200">
+
+### gif demo 
 ![gif](https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/dio_log_example.gif)
