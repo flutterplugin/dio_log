@@ -1,9 +1,7 @@
-import 'package:dio_log/http_log_interceptor.dart';
-import 'package:dio_log/log_pool_manage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'json_view.dart';
+import 'dio_log.dart';
 
 class RequestLogWidget extends StatefulWidget {
   final HttpLog httpLog;
@@ -43,7 +41,7 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
     var options = widget.httpLog.options;
 
     ///格式化请求时间
-    var requestTime = _getTimeStr(DateTime.fromMillisecondsSinceEpoch(
+    var requestTime = getTimeStr(DateTime.fromMillisecondsSinceEpoch(
         options.queryParameters[HttpLogInterceptor.reqTimeKey]));
 
     ///格式化返回时间
@@ -54,7 +52,7 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
     }
     var responseTime = reqFail
         ? '请求失败'
-        : _getTimeStr(DateTime.fromMillisecondsSinceEpoch(resTime));
+        : getTimeStr(DateTime.fromMillisecondsSinceEpoch(resTime));
 
     ///计算请求耗时
     var duration =
@@ -169,15 +167,5 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
         )
       ],
     );
-  }
-
-  ///format(2018.09.08  08.20 11:22)
-  String _getTimeStr(DateTime dateTime) {
-    return "${twoNum(dateTime.year)}.${twoNum(dateTime.month)}.${twoNum(dateTime.day)}    ${twoNum(dateTime.hour)}:${twoNum(dateTime.minute)}:${dateTime.millisecond}";
-  }
-
-  ///转成两位数
-  String twoNum(int num) {
-    return num > 9 ? num.toString() : "0$num";
   }
 }
