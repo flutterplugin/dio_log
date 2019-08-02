@@ -1,6 +1,6 @@
 name: dio_log
 description: http requests log of dio .This plugin helps you display log information for requests
-version: 1.1.1
+version: 1.2.0
 author: rich <dgsimle@sina.com>
 homepage: https://github.com/flutterplugin/dio_log
 

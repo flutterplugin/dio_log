@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 
 class JsonView extends StatefulWidget {
   ///要展示的json数据
-  final Map<String, dynamic> json;
+  final dynamic json;
 
   JsonView(this.json);
 
@@ -29,6 +29,14 @@ class _JsonViewState extends State<JsonView> {
   @override
   Widget build(BuildContext context) {
     currentIndex = 0;
+    Widget w;
+    JsonType type = getType(widget.json);
+    if (type == JsonType.object) {
+      w = _buildObject(widget.json);
+    } else if (type == JsonType.array) {
+      List list = widget.json as List;
+      w = _buildArray(list, '');
+    }
     return Column(
       children: <Widget>[
         Row(
@@ -65,7 +73,7 @@ class _JsonViewState extends State<JsonView> {
           'Tip: long press a key to copy the value to the clipboard',
           style: TextStyle(fontSize: 10),
         ),
-        _buildObject(widget.json),
+        w,
       ],
     );
   }
@@ -131,7 +139,9 @@ class _JsonViewState extends State<JsonView> {
 
     ///添加key的展示
     Widget keyW;
-    if (_isShow(currentIndex)) {
+    if (key.isEmpty) {
+      keyW = _getDefText('[');
+    } else if (_isShow(currentIndex)) {
       keyW = _getDefText('$key:[');
     } else {
       keyW = _getDefText('$key:[...]');

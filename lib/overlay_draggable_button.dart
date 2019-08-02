@@ -30,7 +30,7 @@ dismissDebugBtn() {
 }
 
 ///悬浮按钮展示状态
-bool debugBtnisShow() {
+bool debugBtnIsShow() {
   return !(itemEntry == null);
 }
 
