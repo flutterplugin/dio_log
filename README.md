@@ -7,7 +7,7 @@
 ### Add dependency
 ### 添加依赖
 ```
-dependencies: dio_log : ^1.2.0 #^latest_version
+dependencies: dio_log : ^1.2.1 #^latest_version
 ```
 ### set interceptor of dio
 ### 给dio设置监听
