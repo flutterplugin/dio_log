@@ -1,3 +1,6 @@
+## [v1.2.1] - 2019/8/05
+* add example project
+* Fix the response parsing bug
 ## [v1.2.0] - 2019/8/01
 * add overlay_draggable_button(Global float window is easier to open HttpLogListWidget)
 * add clear log function at requestList

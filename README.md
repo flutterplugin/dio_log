@@ -7,7 +7,7 @@
 ### Add dependency
 ### 添加依赖
 ```
-dependencies: dio_log : ^1.2.0 #^latest_version
+dependencies: dio_log : ^1.2.1 #^latest_version
 ```
 ### set interceptor of dio
 ### 给dio设置监听
@@ -17,7 +17,12 @@ dio.interceptors.add(HttpLogInterceptor());
 ### Add a global hover button on your home page to jump through the log list
 ### 在你的主页面添加全局的悬浮按钮，用于跳转日志列表
 ```
+///display overlay button 显示悬浮按钮
 showDebugBtn(context);
+///cancel overlay button 取消悬浮按钮
+dismissDebugBtn();
+///overlay button state of display 悬浮按钮展示状态
+debugBtnIsShow()
 ```
 ### Or open a log list where you want it to be
 ### 或者在你期望的地方打开日志列表

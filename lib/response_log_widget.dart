@@ -16,12 +16,11 @@ class _ResponseLogWidgetState extends State<ResponseLogWidget> {
   @override
   Widget build(BuildContext context) {
     var response = widget.httpLog.response;
-    if (response.data == null) {
+    if (response?.data == null) {
       return Center(
         child: Text('No response received'),
       );
     }
-    Map<String, dynamic> data = response.data as Map<String, dynamic>;
-    return SingleChildScrollView(child: JsonView(data));
+    return SingleChildScrollView(child: JsonView(response?.data));
   }
 }
