@@ -1,12 +1,13 @@
+import 'package:dio_log/bean/net_options.dart';
 import 'package:dio_log/utils/copy_clipboard.dart';
 import 'package:flutter/material.dart';
 
 import '../dio_log.dart';
 
 class LogRequestWidget extends StatefulWidget {
-  final HttpLog httpLog;
+  final NetOptions netOptions;
 
-  LogRequestWidget(this.httpLog);
+  LogRequestWidget(this.netOptions);
 
   @override
   _LogRequestWidgetState createState() => _LogRequestWidgetState();
@@ -38,131 +39,71 @@ class _LogRequestWidgetState extends State<LogRequestWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var options = widget.httpLog.options;
+    var reqOpt = widget.netOptions.reqOptions;
+    var resOpt = widget.netOptions.resOptions;
 
     ///格式化请求时间
-    var requestTime = getTimeStr(DateTime.fromMillisecondsSinceEpoch(
-        options.queryParameters[HttpLogInterceptor.reqTimeKey]));
+    var requestTime = getTimeStr(reqOpt.requestTime);
 
     ///格式化返回时间
-    var resTime = options.queryParameters[HttpLogInterceptor.resTimeKey];
-    if (resTime == null) {
-      reqFail = true;
-      resTime = 0;
-    }
-    var responseTime = reqFail
-        ? '请求失败'
-        : getTimeStr(DateTime.fromMillisecondsSinceEpoch(resTime));
-
-    ///计算请求耗时
-    var duration =
-        '${resTime - options.queryParameters[HttpLogInterceptor.reqTimeKey]}ms';
-    if (reqFail) {
-      duration = '遥遥无期';
-    }
-
-    ///拼接实际请求链接
-    StringBuffer str = StringBuffer(options.baseUrl + options.path + '?');
-    options.queryParameters.forEach((key, value) {
-      if (key == HttpLogInterceptor.resTimeKey) {
-      } else {
-        str.write('$key=$value&');
-      }
-    });
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          _buildItem('method', options.method),
-          _buildItem('requestTime', requestTime),
-          _buildItem('responseTime', responseTime),
-          _buildItem('duration', duration),
-          _buildCopyItem('requestUrl', str.toString() ?? '', _urlController),
-          _buildCopyItem(
-              'body', options.data.toString() ?? '', _bodyController),
-          _buildCopyItem('params', options.queryParameters.toString() ?? '',
-              _paramController),
-          _buildCopyItem(
-              'cookie', options.headers['cookie'] ?? '', _cookieController),
-          Text('Headers:'),
-          JsonView(options.headers),
-          Text('extra:'),
-          JsonView(options.extra),
-        ],
-      ),
-    );
-  }
-
-  _buildItem(key, value) {
-    return Container(
-      padding: EdgeInsets.all(10.0),
-      child: Row(
-        children: <Widget>[
-          Container(
-            width: 120.0,
-            child: Text(
-              key + '      ',
-              style: TextStyle(
-                  fontSize: 16.0, color: reqFail ? Colors.red : Colors.black),
-            ),
-          ),
-          Column(
-            children: <Widget>[
-              Text(
-                value,
-                maxLines: 4,
-                overflow: TextOverflow.visible,
-                style: TextStyle(
-                    fontSize: 13.0, color: reqFail ? Colors.red : Colors.black),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  _buildCopyItem(key, value, TextEditingController controller) {
-    OutlineInputBorder inputBorder = new OutlineInputBorder(
-        borderSide: BorderSide(
-            color: Colors.black, style: BorderStyle.solid, width: 1.0));
-
-    controller.text = value;
-    return Column(
-      children: <Widget>[
-        SizedBox(height: 20.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+    var responseTime = getTimeStr(resOpt.responseTime);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              key,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              'Tip: long press a key to copy the value to the clipboard',
+              style: TextStyle(fontSize: 10, color: Colors.red),
             ),
-            RaisedButton(
-              child: Text('copy'),
-              onPressed: () {
-                copyClipboard(context, value.toString());
-              },
-            )
+            _buildKeyValue('url', reqOpt.url),
+            _buildKeyValue('method', reqOpt.method),
+            _buildKeyValue('requestTime', requestTime),
+            _buildKeyValue('responseTime', responseTime),
+            _buildKeyValue('duration', '${resOpt.duration}ms'),
+            _buildJsonView('body', reqOpt.body),
+            _buildJsonView('params', reqOpt.params),
+            _buildJsonView('header', reqOpt.headers),
           ],
         ),
-        Container(
-          padding: EdgeInsets.all(10.0),
-          child: TextField(
-            controller: controller,
-            maxLines: 5,
-            decoration: InputDecoration(
-              fillColor: Color(0xFFF8F8F8),
-              filled: true,
-              enabledBorder: inputBorder,
-              border: inputBorder,
-              focusedBorder: inputBorder,
-            ),
-          ),
-        )
+      ),
+    );
+  }
+
+  Widget _buildJsonView(key, json) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _getDefText('$key:'),
+        JsonView(json: json),
       ],
+    );
+  }
+
+  ///构建子节点的展示
+  Widget _buildKeyValue(k, v) {
+    Widget w = _getDefText('$k:${v is String ? '$v' : v?.toString() ?? null}');
+    if (k != null) {
+      w = GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onLongPress: () {
+          copyClipboard(context, v);
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 2),
+          child: w,
+        ),
+      );
+    }
+    return w;
+  }
+
+  ///默认的文本大小
+  Text _getDefText(String str) {
+    return Text(
+      str,
+      style: TextStyle(fontSize: 15),
     );
   }
 }

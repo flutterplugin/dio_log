@@ -4,7 +4,7 @@ import 'package:dio_log/dio_log.dart';
 Dio dio = Dio();
 
 initHttp() {
-  dio.interceptors.add(HttpLogInterceptor());
+  dio.interceptors.add(DioLogInterceptor());
 }
 
 httpGet(String url) {

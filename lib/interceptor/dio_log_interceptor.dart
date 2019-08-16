@@ -1,19 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:dio_log/bean/err_options.dart';
+import 'package:dio_log/bean/req_options.dart';
+import 'package:dio_log/bean/res_options.dart';
 
-import 'bean/err_options.dart';
-import 'bean/req_options.dart';
-import 'bean/res_options.dart';
-import 'interceptor/dio_log_interceptor.dart';
-import 'utils/log_pool_manager.dart';
+import '../dio_log.dart';
 
 ///log日志的处理类
-/// [DioLogInterceptor]
-@Deprecated('use [DioLogInterceptor] Instead of HttpLogInterceptor')
-class HttpLogInterceptor implements InterceptorsWrapper {
+class DioLogInterceptor implements InterceptorsWrapper {
   LogPoolManager logManage;
-  static final String reqTimeKey = "logRequestTime";
-  static final String resTimeKey = "logResponseTime";
-  HttpLogInterceptor() {
+  DioLogInterceptor() {
     logManage = LogPoolManager.getInstance();
   }
 

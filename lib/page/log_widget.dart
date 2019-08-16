@@ -1,11 +1,12 @@
+import 'package:dio_log/bean/net_options.dart';
 import 'package:dio_log/dio_log.dart';
 import 'package:flutter/material.dart';
 
 ///网络请求详情
 class LogWidget extends StatefulWidget {
-  final HttpLog httpLog;
+  final NetOptions netOptions;
 
-  LogWidget(this.httpLog);
+  LogWidget(this.netOptions);
 
   @override
   _LogWidgetState createState() => _LogWidgetState();
@@ -39,7 +40,7 @@ class _LogWidgetState extends State<LogWidget>
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.httpLog.options.path,
+          widget.netOptions.reqOptions.url,
           style: TextStyle(
             fontSize: 16.0,
             color: Color(0xFF4a4a4a),
@@ -57,11 +58,11 @@ class _LogWidgetState extends State<LogWidget>
         itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
-            return LogRequestWidget(widget.httpLog);
+            return LogRequestWidget(widget.netOptions);
           } else if (index == 1) {
-            return LogResponseWidget(widget.httpLog);
+            return LogResponseWidget(widget.netOptions);
           } else {
-            return LogErrorWidget(widget.httpLog);
+            return LogErrorWidget(widget.netOptions);
           }
         },
       ),

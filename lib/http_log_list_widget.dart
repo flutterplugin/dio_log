@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
+import 'bean/net_options.dart';
 import 'dio_log.dart';
 import 'page/log_widget.dart';
 import 'theme/style.dart';
@@ -13,13 +14,13 @@ class HttpLogListWidget extends StatefulWidget {
 }
 
 class _HttpLogListWidgetState extends State<HttpLogListWidget> {
-  LinkedHashMap<String, HttpLog> logMap;
+  LinkedHashMap<String, NetOptions> logMap;
   List<String> keys;
 
   @override
   Widget build(BuildContext context) {
-    logMap = LogPoolManage.getInstance().logMap;
-    keys = LogPoolManage.getInstance().keys;
+    logMap = LogPoolManager.getInstance().logMap;
+    keys = LogPoolManager.getInstance().keys;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -57,7 +58,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
           ),
           InkWell(
             onTap: () {
-              LogPoolManage.getInstance().clear();
+              LogPoolManager.getInstance().clear();
               setState(() {});
             },
             child: Container(
@@ -80,21 +81,21 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               reverse: false,
               itemCount: keys.length,
               itemBuilder: (BuildContext context, int index) {
-                HttpLog item = logMap[keys[index]];
+                NetOptions item = logMap[keys[index]];
                 return _buildItem(item);
               },
             ),
     );
   }
 
-  Widget _buildItem(HttpLog item) {
-    var options = item.options;
+  Widget _buildItem(NetOptions item) {
+    var resOpt = item.resOptions;
+    var reqOpt = item.reqOptions;
 
     ///格式化请求时间
-    var requestTime = getTimeStr1(DateTime.fromMillisecondsSinceEpoch(
-        options.queryParameters[HttpLogInterceptor.reqTimeKey]));
+    var requestTime = getTimeStr1(reqOpt.requestTime);
 
-    Color textColor = (item.response?.data == null) ? Colors.red : Colors.black;
+    Color textColor = (item.errOptions != null) ? Colors.red : Colors.black;
     return Card(
       margin: EdgeInsets.all(8),
       elevation: 6,
@@ -111,14 +112,14 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'url:${item.options.baseUrl + item.options.path}',
+                'url:${reqOpt.url}',
                 style: TextStyle(
                   color: textColor,
                 ),
               ),
               Divider(height: 2),
               Text(
-                'status: ${item?.response?.statusCode ?? item?.err?.response?.statusCode}',
+                'status: ${resOpt?.statusCode}',
                 style: TextStyle(
                   color: textColor,
                 ),

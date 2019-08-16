@@ -1,4 +1,8 @@
 class ErrOptions {
-  final String errorMsg;
-  ErrOptions(this.errorMsg);
+  int id;
+  String errorMsg;
+  ErrOptions({
+    this.id,
+    this.errorMsg,
+  });
 }

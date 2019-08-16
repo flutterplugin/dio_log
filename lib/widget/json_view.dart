@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,7 +11,15 @@ class JsonView extends StatefulWidget {
   ///要展示的json数据
   final dynamic json;
 
-  JsonView(this.json);
+  ///是否展开全部json
+  final bool isShowAll;
+
+  final double fontSize;
+  JsonView({
+    this.json,
+    this.isShowAll = false,
+    this.fontSize = 14,
+  });
 
   @override
   _JsonViewState createState() => _JsonViewState();
@@ -21,11 +31,6 @@ class _JsonViewState extends State<JsonView> {
   ///当前节点编号
   int currentIndex = 0;
 
-  ///文字大小
-  double fontSize = 14;
-
-  ///是否展开全部json
-  bool isShowAll = false;
   @override
   Widget build(BuildContext context) {
     currentIndex = 0;
@@ -36,46 +41,12 @@ class _JsonViewState extends State<JsonView> {
     } else if (type == JsonType.array) {
       List list = widget.json as List;
       w = _buildArray(list, '');
+    } else {
+      var je = JsonEncoder.withIndent('  ');
+      var json = je.convert(widget.json);
+      return _getDefText(json);
     }
-    return Column(
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                _copy(widget.json?.toString());
-              },
-              child: Text('copy json'),
-            ),
-            SizedBox(width: 10),
-            Text(isShowAll ? 'shrink all' : 'expand all'),
-            Checkbox(
-              value: isShowAll,
-              onChanged: (check) {
-                isShowAll = check;
-                _flexAll(check);
-              },
-            ),
-            Expanded(
-              child: Slider(
-                value: fontSize,
-                max: 30,
-                min: 1,
-                onChanged: (v) {
-                  fontSize = v;
-                  setState(() {});
-                },
-              ),
-            ),
-          ],
-        ),
-        Text(
-          'Tip: long press a key to copy the value to the clipboard',
-          style: TextStyle(fontSize: 10),
-        ),
-        w,
-      ],
-    );
+    return w;
   }
 
   ///构建object节点的展示
@@ -187,6 +158,9 @@ class _JsonViewState extends State<JsonView> {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
+        if (key == 0) {
+          _flexAll(!_isShow(key));
+        }
         _flexSwitch(key.toString());
       },
       child: Row(
@@ -224,7 +198,7 @@ class _JsonViewState extends State<JsonView> {
   bool _isShow(int key) {
     ///说明是根节点
     if (key == 1) return true;
-    if (isShowAll) {
+    if (widget.isShowAll) {
       return showMap[key.toString()] ?? true;
     } else {
       return showMap[key.toString()] ?? false;
@@ -261,7 +235,7 @@ class _JsonViewState extends State<JsonView> {
   Text _getDefText(String str) {
     return Text(
       str,
-      style: TextStyle(fontSize: fontSize),
+      style: TextStyle(fontSize: widget.fontSize),
     );
   }
 
