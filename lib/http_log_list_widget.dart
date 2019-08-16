@@ -3,6 +3,8 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 import 'dio_log.dart';
+import 'page/log_widget.dart';
+import 'theme/style.dart';
 
 ///网络请求日志列表
 class HttpLogListWidget extends StatefulWidget {
@@ -34,13 +36,40 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
         elevation: 1.0,
         iconTheme: IconThemeData(color: Color(0xFF555555)),
         actions: <Widget>[
-          RaisedButton(
-            onPressed: () {
+          InkWell(
+            onTap: () {
+              if (debugBtnIsShow()) {
+                dismissDebugBtn();
+              } else {
+                showDebugBtn(context, isDelay: false);
+              }
+              setState(() {});
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Align(
+                child: Text(
+                  debugBtnIsShow() ? 'close overlay' : 'open overlay',
+                  style: Style.defTextBold,
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
               LogPoolManage.getInstance().clear();
               setState(() {});
             },
-            child: Text('clear log'),
-          )
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Align(
+                child: Text(
+                  'clear',
+                  style: Style.defTextBold,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
       body: logMap.length < 1
@@ -64,13 +93,15 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
     ///格式化请求时间
     var requestTime = getTimeStr1(DateTime.fromMillisecondsSinceEpoch(
         options.queryParameters[HttpLogInterceptor.reqTimeKey]));
+
+    Color textColor = (item.response?.data == null) ? Colors.red : Colors.black;
     return Card(
       margin: EdgeInsets.all(8),
       elevation: 6,
       child: InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return HttpLogWidget(item);
+            return LogWidget(item);
           }));
         },
         child: Container(
@@ -80,18 +111,23 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'requestTime: $requestTime',
+                'url:${item.options.baseUrl + item.options.path}',
                 style: TextStyle(
-                  color:
-                      (item.response?.data == null) ? Colors.red : Colors.black,
+                  color: textColor,
                 ),
               ),
               Divider(height: 2),
               Text(
-                'url:${item.options.baseUrl + item.options.path}',
+                'status: ${item?.response?.statusCode ?? item?.err?.response?.statusCode}',
                 style: TextStyle(
-                  color:
-                      (item.response?.data == null) ? Colors.red : Colors.black,
+                  color: textColor,
+                ),
+              ),
+              Divider(height: 2),
+              Text(
+                'requestTime: $requestTime',
+                style: TextStyle(
+                  color: textColor,
                 ),
               ),
             ],

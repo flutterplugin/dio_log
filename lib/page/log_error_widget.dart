@@ -1,16 +1,16 @@
 import 'package:dio_log/dio_log.dart';
 import 'package:flutter/material.dart';
 
-class ErrorLogWidget extends StatefulWidget {
+class LogErrorWidget extends StatefulWidget {
   final HttpLog httpLog;
 
-  ErrorLogWidget(this.httpLog);
+  LogErrorWidget(this.httpLog);
 
   @override
-  _ErrorLogWidgetState createState() => _ErrorLogWidgetState();
+  _LogErrorWidgetState createState() => _LogErrorWidgetState();
 }
 
-class _ErrorLogWidgetState extends State<ErrorLogWidget> {
+class _LogErrorWidgetState extends State<LogErrorWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(

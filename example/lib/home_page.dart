@@ -57,6 +57,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _sendRequest() async {
-    httpGet(url);
+    httpGet(controller.text);
   }
 }

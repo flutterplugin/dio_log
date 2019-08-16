@@ -2,16 +2,16 @@ import 'package:dio_log/dio_log.dart';
 import 'package:flutter/material.dart';
 
 ///网络请求详情
-class HttpLogWidget extends StatefulWidget {
+class LogWidget extends StatefulWidget {
   final HttpLog httpLog;
 
-  HttpLogWidget(this.httpLog);
+  LogWidget(this.httpLog);
 
   @override
-  _HttpLogWidgetState createState() => _HttpLogWidgetState();
+  _LogWidgetState createState() => _LogWidgetState();
 }
 
-class _HttpLogWidgetState extends State<HttpLogWidget>
+class _LogWidgetState extends State<LogWidget>
     with SingleTickerProviderStateMixin {
   final List<Tab> tabs = <Tab>[
     new Tab(text: "request"),
@@ -57,11 +57,11 @@ class _HttpLogWidgetState extends State<HttpLogWidget>
         itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
-            return RequestLogWidget(widget.httpLog);
+            return LogRequestWidget(widget.httpLog);
           } else if (index == 1) {
-            return ResponseLogWidget(widget.httpLog);
+            return LogResponseWidget(widget.httpLog);
           } else {
-            return ErrorLogWidget(widget.httpLog);
+            return LogErrorWidget(widget.httpLog);
           }
         },
       ),

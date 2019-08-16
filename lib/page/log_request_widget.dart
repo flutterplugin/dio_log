@@ -1,18 +1,18 @@
+import 'package:dio_log/utils/copy_clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import 'dio_log.dart';
+import '../dio_log.dart';
 
-class RequestLogWidget extends StatefulWidget {
+class LogRequestWidget extends StatefulWidget {
   final HttpLog httpLog;
 
-  RequestLogWidget(this.httpLog);
+  LogRequestWidget(this.httpLog);
 
   @override
-  _RequestLogWidgetState createState() => _RequestLogWidgetState();
+  _LogRequestWidgetState createState() => _LogRequestWidgetState();
 }
 
-class _RequestLogWidgetState extends State<RequestLogWidget> {
+class _LogRequestWidgetState extends State<LogRequestWidget> {
   TextEditingController _urlController;
   TextEditingController _cookieController;
   TextEditingController _paramController;
@@ -143,10 +143,7 @@ class _RequestLogWidgetState extends State<RequestLogWidget> {
             RaisedButton(
               child: Text('copy'),
               onPressed: () {
-                var snackBar =
-                    SnackBar(content: Text('copy success to clipboard'));
-                Scaffold.of(context).showSnackBar(snackBar);
-                Clipboard.setData(ClipboardData(text: value));
+                copyClipboard(context, value.toString());
               },
             )
           ],

@@ -1,13 +1,14 @@
 
 # dio_log
-
+[![pub package](https://img.shields.io/pub/v/dio_log.svg)](https://pub.dev/packages/dio_log)
 #### http requests log of dio 
 #### 基于dio的网络请求日志
 
 ### Add dependency
 ### 添加依赖
 ```
-dependencies: dio_log : ^1.2.1 #^latest_version
+dependencies: 
+  dio_log : ^1.2.1 #^latest_version
 ```
 ### set interceptor of dio
 ### 给dio设置监听

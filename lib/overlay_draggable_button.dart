@@ -11,16 +11,22 @@ import 'dio_log.dart';
 OverlayEntry itemEntry;
 
 ///显示全局悬浮调试按钮
-showDebugBtn(BuildContext context, {Widget button}) {
+showDebugBtn(BuildContext context, {Widget button, bool isDelay = true}) {
   dismissDebugBtn();
-  Timer(const Duration(milliseconds: 500), () {
-    ///显示悬浮menu
+  var fun = () {
     itemEntry = OverlayEntry(
         builder: (BuildContext context) => button ?? DraggableButtonWidget());
 
     ///显示悬浮menu
     Overlay.of(context).insert(itemEntry);
-  });
+  };
+  if (!isDelay) {
+    fun();
+  } else {
+    Timer(const Duration(milliseconds: 500), () {
+      fun();
+    });
+  }
 }
 
 ///关闭悬浮按钮
@@ -74,13 +80,15 @@ class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
       );
     };
     Widget w;
+    Color primaryColor = Theme.of(context).primaryColor;
+    primaryColor = primaryColor.withOpacity(0.6);
     w = GestureDetector(
       onTap: widget.onTap ?? tap,
       onPanUpdate: _dragUpdate,
       child: Container(
         width: widget.btnSize,
         height: widget.btnSize,
-        color: Theme.of(context).primaryColor,
+        color: primaryColor,
         child: Center(
           child: Text(
             widget.title,
