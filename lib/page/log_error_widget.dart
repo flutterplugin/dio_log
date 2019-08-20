@@ -10,7 +10,8 @@ class LogErrorWidget extends StatefulWidget {
   _LogErrorWidgetState createState() => _LogErrorWidgetState();
 }
 
-class _LogErrorWidgetState extends State<LogErrorWidget> {
+class _LogErrorWidgetState extends State<LogErrorWidget>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,4 +21,7 @@ class _LogErrorWidgetState extends State<LogErrorWidget> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

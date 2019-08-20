@@ -95,7 +95,9 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
     ///格式化请求时间
     var requestTime = getTimeStr1(reqOpt.requestTime);
 
-    Color textColor = (item.errOptions != null) ? Colors.red : Colors.black;
+    Color textColor = (item.errOptions != null || resOpt?.statusCode == null)
+        ? Colors.red
+        : Colors.black;
     return Card(
       margin: EdgeInsets.all(8),
       elevation: 6,
@@ -112,7 +114,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'url:${reqOpt.url}',
+                'url: ${reqOpt.url}',
                 style: TextStyle(
                   color: textColor,
                 ),
@@ -126,7 +128,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               ),
               Divider(height: 2),
               Text(
-                'requestTime: $requestTime',
+                'requestTime: $requestTime    duration: ${resOpt?.duration ?? 0}ms',
                 style: TextStyle(
                   color: textColor,
                 ),

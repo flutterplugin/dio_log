@@ -13,7 +13,8 @@ class LogRequestWidget extends StatefulWidget {
   _LogRequestWidgetState createState() => _LogRequestWidgetState();
 }
 
-class _LogRequestWidgetState extends State<LogRequestWidget> {
+class _LogRequestWidgetState extends State<LogRequestWidget>
+    with AutomaticKeepAliveClientMixin {
   TextEditingController _urlController;
   TextEditingController _cookieController;
   TextEditingController _paramController;
@@ -46,7 +47,7 @@ class _LogRequestWidgetState extends State<LogRequestWidget> {
     var requestTime = getTimeStr(reqOpt.requestTime);
 
     ///格式化返回时间
-    var responseTime = getTimeStr(resOpt.responseTime);
+    var responseTime = getTimeStr(resOpt?.responseTime ?? reqOpt.requestTime);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -61,7 +62,7 @@ class _LogRequestWidgetState extends State<LogRequestWidget> {
             _buildKeyValue('method', reqOpt.method),
             _buildKeyValue('requestTime', requestTime),
             _buildKeyValue('responseTime', responseTime),
-            _buildKeyValue('duration', '${resOpt.duration}ms'),
+            _buildKeyValue('duration', '${resOpt?.duration ?? 0}ms'),
             _buildJsonView('body', reqOpt.body),
             _buildJsonView('params', reqOpt.params),
             _buildJsonView('header', reqOpt.headers),
@@ -106,4 +107,7 @@ class _LogRequestWidgetState extends State<LogRequestWidget> {
       style: TextStyle(fontSize: 15),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

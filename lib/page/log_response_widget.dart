@@ -12,13 +12,14 @@ class LogResponseWidget extends StatefulWidget {
   _LogResponseWidgetState createState() => _LogResponseWidgetState();
 }
 
-class _LogResponseWidgetState extends State<LogResponseWidget> {
+class _LogResponseWidgetState extends State<LogResponseWidget>
+    with AutomaticKeepAliveClientMixin {
   bool isShowAll = false;
   double fontSize = 14;
   @override
   Widget build(BuildContext context) {
     var response = widget.netOptions.resOptions;
-    var json = response.data ?? 'no response';
+    var json = response?.data ?? 'no response';
     return SingleChildScrollView(
         child: Column(
       children: <Widget>[
@@ -67,4 +68,7 @@ class _LogResponseWidgetState extends State<LogResponseWidget> {
       ],
     ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

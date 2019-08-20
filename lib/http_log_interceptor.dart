@@ -11,8 +11,6 @@ import 'utils/log_pool_manager.dart';
 @Deprecated('use [DioLogInterceptor] Instead of HttpLogInterceptor')
 class HttpLogInterceptor implements InterceptorsWrapper {
   LogPoolManager logManage;
-  static final String reqTimeKey = "logRequestTime";
-  static final String resTimeKey = "logResponseTime";
   HttpLogInterceptor() {
     logManage = LogPoolManager.getInstance();
   }
