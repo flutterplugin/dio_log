@@ -1,3 +1,6 @@
+## [v1.3.0] - 2019/8/21
+* Optimize the request display UI
+* HttpLogInterceptor Deprecated and change it to DioLogInterceptor
 ## [v1.2.1] - 2019/8/05
 * add example project
 * Fix the response parsing bug

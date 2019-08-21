@@ -8,12 +8,12 @@
 ### 添加依赖
 ```
 dependencies: 
-  dio_log : ^1.2.1 #^latest_version
+  dio_log : ^1.3.0 #^latest_version
 ```
 ### set interceptor of dio
 ### 给dio设置监听
 ```
-dio.interceptors.add(HttpLogInterceptor());
+dio.interceptors.add(DioLogInterceptor());
 ```
 ### Add a global hover button on your home page to jump through the log list
 ### 在你的主页面添加全局的悬浮按钮，用于跳转日志列表
@@ -36,9 +36,9 @@ Navigator.of(context).push(
 ```
 
 ### Screenshot 
-<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_list.PNG" width="200">      
-<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_request.PNG" width="200">
-<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_response.PNG" width="200">
+<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_list.jpg" width="200">      
+<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_request.jpg" width="200">
+<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_response.jpg" width="200">
 
 ### gif demo 
 ![gif](https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/dio_log_example.gif)
