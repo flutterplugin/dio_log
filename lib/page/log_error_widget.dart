@@ -14,6 +14,7 @@ class _LogErrorWidgetState extends State<LogErrorWidget>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       height: double.infinity,
       child: Center(

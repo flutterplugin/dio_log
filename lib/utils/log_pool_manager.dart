@@ -13,7 +13,7 @@ class LogPoolManager {
   List<String> keys;
 
   ///存储请求最大数
-  int maxCount = 10;
+  int maxCount = 50;
   static LogPoolManager _instance;
 
   LogPoolManager._singleton() {
@@ -39,7 +39,7 @@ class LogPoolManager {
   }
 
   void onRequest(ReqOptions options) {
-    if (logMap.length > maxCount) {
+    if (logMap.length >= maxCount) {
       logMap.remove(keys.last);
       keys.removeLast();
     }

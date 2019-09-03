@@ -40,7 +40,7 @@ class DioLogInterceptor implements InterceptorsWrapper {
   @override
   onResponse(Response response) {
     var resOpt = ResOptions();
-    resOpt.id = response.request.hashCode;
+    resOpt.id = response.request?.hashCode;
     resOpt.responseTime = DateTime.now();
     resOpt.statusCode = response.statusCode ?? 0;
     resOpt.data = response.data;

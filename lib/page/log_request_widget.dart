@@ -40,6 +40,7 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var reqOpt = widget.netOptions.reqOptions;
     var resOpt = widget.netOptions.resOptions;
 

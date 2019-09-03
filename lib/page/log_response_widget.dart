@@ -18,6 +18,7 @@ class _LogResponseWidgetState extends State<LogResponseWidget>
   double fontSize = 14;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var response = widget.netOptions.resOptions;
     var json = response?.data ?? 'no response';
     return SingleChildScrollView(

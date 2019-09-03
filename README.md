@@ -34,6 +34,12 @@ Navigator.of(context).push(
     ),
   );  
 ```
+### Other configurable parameters
+### 其他可设置参数
+```
+/// Sets the maximum number of entries for logging 设置记录日志的最大条数
+LogPoolManager.getInstance().maxCount = 100;
+```
 
 ### Screenshot 
 <img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_list.jpg" width="200">      
