@@ -18,7 +18,7 @@ showDebugBtn(BuildContext context, {Widget button, bool isDelay = true}) {
         builder: (BuildContext context) => button ?? DraggableButtonWidget());
 
     ///显示悬浮menu
-    Overlay.of(context).insert(itemEntry);
+    Overlay.of(context)?.insert(itemEntry);
   };
   if (!isDelay) {
     fun();
