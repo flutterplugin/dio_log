@@ -32,6 +32,14 @@ class _JsonViewState extends State<JsonView> {
   int currentIndex = 0;
 
   @override
+  void didUpdateWidget(JsonView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isShowAll != widget.isShowAll) {
+      _flexAll(widget.isShowAll);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     currentIndex = 0;
     Widget w;
@@ -160,6 +168,7 @@ class _JsonViewState extends State<JsonView> {
       onTap: () {
         if (key == 0) {
           _flexAll(!_isShow(key));
+          setState(() {});
         }
         _flexSwitch(key.toString());
       },
@@ -217,7 +226,6 @@ class _JsonViewState extends State<JsonView> {
     showMap.forEach((k, v) {
       showMap[k] = flex;
     });
-    setState(() {});
   }
 
   ///判断value值的类型

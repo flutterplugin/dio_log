@@ -1,3 +1,5 @@
+## [v1.3.1] - 2019/9/05
+* fix shrink and expand bug
 ## [v1.3.0] - 2019/8/21
 * Optimize the request display UI
 * HttpLogInterceptor Deprecated and change it to DioLogInterceptor
