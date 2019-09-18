@@ -1,3 +1,7 @@
+## [v1.3.2] - 2019/9/18
+* Support Flutter Web
+* Support dio >2.2.1 
+* if you dio version < 2.2.1, please use dio_log:1.3.1
 ## [v1.3.1] - 2019/9/05
 * fix shrink and expand bug
 ## [v1.3.0] - 2019/8/21
