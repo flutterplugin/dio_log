@@ -8,7 +8,14 @@
 ### 添加依赖
 ```
 dependencies: 
-  dio_log : ^1.3.1 #^latest_version
+  dio_log : ^1.3.3
+```
+### [github](https://github.com/flutterplugin/dio_log)
+```
+dio_log:
+  git:
+  url: git@github.com:flutterplugin/dio_log.git
+  ref: develop
 ```
 ### set interceptor of dio
 ### 给dio设置监听

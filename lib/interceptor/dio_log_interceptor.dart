@@ -6,14 +6,14 @@ import 'package:dio_log/bean/res_options.dart';
 import '../dio_log.dart';
 
 ///log日志的处理类
-class DioLogInterceptor implements InterceptorsWrapper {
+class DioLogInterceptor implements Interceptor {
   LogPoolManager logManage;
   DioLogInterceptor() {
     logManage = LogPoolManager.getInstance();
   }
 
   @override
-  onError(DioError err) {
+  Future onError(DioError err) async {
     var errOptions = ErrOptions();
     errOptions.id = err.request.hashCode;
     errOptions.errorMsg = err.toString();
@@ -23,7 +23,7 @@ class DioLogInterceptor implements InterceptorsWrapper {
   }
 
   @override
-  onRequest(RequestOptions options) {
+  Future onRequest(RequestOptions options) async {
     var reqOpt = ReqOptions();
     reqOpt.id = options.hashCode;
     reqOpt.url = options.uri.toString();
@@ -38,7 +38,7 @@ class DioLogInterceptor implements InterceptorsWrapper {
   }
 
   @override
-  onResponse(Response response) {
+  Future onResponse(Response response) async {
     if (response != null) {
       var resOpt = ResOptions();
       resOpt.id = response.request?.hashCode;
