@@ -1,3 +1,5 @@
+## [v1.3.3] - 2019/9/18
+* Support dio > 3.0.0
 ## [v1.3.2] - 2019/9/18
 * Support Flutter Web
 * Support dio >2.2.1 
