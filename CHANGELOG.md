@@ -1,3 +1,5 @@
+## [v1.3.4] - 2020/2/03
+* add replication request information
 ## [v1.3.3] - 2019/9/18
 * Support dio > 3.0.0
 ## [v1.3.2] - 2019/9/18

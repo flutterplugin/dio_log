@@ -2,7 +2,6 @@ library dio_log;
 
 export 'package:dio_log/widget/json_view.dart';
 
-export 'http_log_interceptor.dart';
 export 'http_log_list_widget.dart';
 export 'interceptor/dio_log_interceptor.dart';
 export 'overlay_draggable_button.dart';

@@ -31,7 +31,7 @@ class DioLogInterceptor implements Interceptor {
     reqOpt.contentType = options.contentType.toString();
     reqOpt.requestTime = DateTime.now();
     reqOpt.params = options.queryParameters;
-    reqOpt.body = options.data;
+    reqOpt.data = options.data;
     reqOpt.headers = options.headers;
     logManage.onRequest(reqOpt);
     return options;

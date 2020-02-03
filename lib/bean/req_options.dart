@@ -5,7 +5,7 @@ class ReqOptions {
   String contentType;
   DateTime requestTime;
   Map<String, dynamic> params;
-  dynamic body;
+  dynamic data;
   Map<String, dynamic> headers;
   ReqOptions({
     this.id,
@@ -15,6 +15,6 @@ class ReqOptions {
     this.requestTime,
     this.headers,
     this.params,
-    this.body,
+    this.data,
   });
 }

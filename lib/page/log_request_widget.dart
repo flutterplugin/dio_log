@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:dio_log/bean/net_options.dart';
 import 'package:dio_log/utils/copy_clipboard.dart';
 import 'package:flutter/material.dart';
@@ -59,12 +60,22 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
               'Tip: long press a key to copy the value to the clipboard',
               style: TextStyle(fontSize: 10, color: Colors.red),
             ),
+            RaisedButton(
+              onPressed: () {
+                copyClipboard(
+                    context,
+                    'url:${reqOpt.url}\nmethod:${reqOpt.method}\nrequestTime:$requestTime\nresponseTime:$responseTime\n'
+                    'duration:${resOpt?.duration ?? 0}ms\nbody:${toJson(reqOpt.data)}\nparams:${toJson(reqOpt.params)}'
+                    '\nheader:${reqOpt.headers}');
+              },
+              child: Text('copy all'),
+            ),
             _buildKeyValue('url', reqOpt.url),
             _buildKeyValue('method', reqOpt.method),
             _buildKeyValue('requestTime', requestTime),
             _buildKeyValue('responseTime', responseTime),
             _buildKeyValue('duration', '${resOpt?.duration ?? 0}ms'),
-            _buildJsonView('body', reqOpt.body),
+            _buildParam(reqOpt.data),
             _buildJsonView('params', reqOpt.params),
             _buildJsonView('header', reqOpt.headers),
           ],
@@ -111,4 +122,14 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
 
   @override
   bool get wantKeepAlive => true;
+
+  Widget _buildParam(dynamic data) {
+    if (data is Map) {
+      return _buildJsonView('body', data);
+    } else if (data is FormData) {
+      return _buildKeyValue('formdata', data.boundary);
+    } else {
+      return SizedBox();
+    }
+  }
 }
