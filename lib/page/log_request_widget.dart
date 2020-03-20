@@ -65,8 +65,8 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
                 copyClipboard(
                     context,
                     'url:${reqOpt.url}\nmethod:${reqOpt.method}\nrequestTime:$requestTime\nresponseTime:$responseTime\n'
-                    'duration:${resOpt?.duration ?? 0}ms\nbody:${toJson(reqOpt.data)}\nparams:${toJson(reqOpt.params)}'
-                    '\nheader:${reqOpt.headers}');
+                    'duration:${resOpt?.duration ?? 0}ms\n${dataFormat(reqOpt.data)}'
+                    '\nparams:${toJson(reqOpt.params)}\nheader:${reqOpt.headers}');
               },
               child: Text('copy all'),
             ),
@@ -123,13 +123,23 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
   @override
   bool get wantKeepAlive => true;
 
+  Map formDataMap;
   Widget _buildParam(dynamic data) {
     if (data is Map) {
       return _buildJsonView('body', data);
     } else if (data is FormData) {
-      return _buildKeyValue('formdata', data.boundary);
+      formDataMap = Map()..addEntries(data.fields)..addEntries(data.files);
+      return _getDefText('formdata:${map2Json(formDataMap)}');
     } else {
       return SizedBox();
+    }
+  }
+
+  String dataFormat(dynamic data) {
+    if (data is FormData) {
+      return 'formdata:${map2Json(formDataMap)}';
+    } else {
+      return 'body:${toJson(data)}';
     }
   }
 }
