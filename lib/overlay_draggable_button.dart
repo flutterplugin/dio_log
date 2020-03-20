@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import 'dio_log.dart';
@@ -12,21 +10,15 @@ OverlayEntry itemEntry;
 
 ///显示全局悬浮调试按钮
 showDebugBtn(BuildContext context, {Widget button, bool isDelay = true}) {
-  dismissDebugBtn();
-  var fun = () {
+  ///widget第一次渲染完成
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    dismissDebugBtn();
     itemEntry = OverlayEntry(
         builder: (BuildContext context) => button ?? DraggableButtonWidget());
 
     ///显示悬浮menu
     Overlay.of(context)?.insert(itemEntry);
-  };
-  if (!isDelay) {
-    fun();
-  } else {
-    Timer(const Duration(milliseconds: 500), () {
-      fun();
-    });
-  }
+  });
 }
 
 ///关闭悬浮按钮
