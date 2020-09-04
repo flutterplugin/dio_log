@@ -1,6 +1,7 @@
-## [v1.3.5] - 2020/3/20
+## [v1.3.5] - 2020/09/04
 * ShowDebugBtn on WidgetsBinding.Instance.AddPostFrameCallback callback
-* show of the FormData parameter
+* Adds a body of type FormData According to
+* Adds a body of type string According to
 ## [v1.3.4] - 2020/2/03
 * add replication request information
 ## [v1.3.3] - 2019/9/18

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:dio_log/bean/net_options.dart';
 import 'package:dio_log/utils/copy_clipboard.dart';
@@ -130,6 +132,13 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
     } else if (data is FormData) {
       formDataMap = Map()..addEntries(data.fields)..addEntries(data.files);
       return _getDefText('formdata:${map2Json(formDataMap)}');
+    } else if (data is String) {
+      try {
+        var decodedMap = json.decode(data);
+        return _buildJsonView('body', decodedMap);
+      } catch (e) {
+        return Text('body: $data');
+      }
     } else {
       return SizedBox();
     }
