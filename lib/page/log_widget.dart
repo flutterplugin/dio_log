@@ -12,8 +12,7 @@ class LogWidget extends StatefulWidget {
   _LogWidgetState createState() => _LogWidgetState();
 }
 
-class _LogWidgetState extends State<LogWidget>
-    with SingleTickerProviderStateMixin {
+class _LogWidgetState extends State<LogWidget> with SingleTickerProviderStateMixin {
   final List<Tab> tabs = <Tab>[
     new Tab(text: "request"),
     new Tab(text: "response"),
@@ -37,20 +36,17 @@ class _LogWidgetState extends State<LogWidget>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
           widget.netOptions.reqOptions.url,
-          style: TextStyle(
-            fontSize: 16.0,
-            color: Color(0xFF4a4a4a),
-          ),
+          style: TextStyle(fontSize: 11),
         ),
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
-        centerTitle: true,
+        backgroundColor: theme.scaffoldBackgroundColor,
         elevation: 1.0,
-        iconTheme: IconThemeData(color: Color(0xFF555555)),
+        iconTheme: theme.iconTheme,
+        textTheme: theme.textTheme,
       ),
       body: PageView.builder(
         controller: _pageController,
@@ -70,12 +66,9 @@ class _LogWidgetState extends State<LogWidget>
         currentIndex: currentIndex,
         onTap: _bottomTap,
         items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.network_wifi), title: Text('request')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.network_wifi), title: Text('response')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.network_wifi), title: Text('error')),
+          BottomNavigationBarItem(icon: Icon(Icons.network_wifi), title: Text('request')),
+          BottomNavigationBarItem(icon: Icon(Icons.network_wifi), title: Text('response')),
+          BottomNavigationBarItem(icon: Icon(Icons.network_wifi), title: Text('error')),
         ],
       ),
     );
@@ -90,7 +83,6 @@ class _LogWidgetState extends State<LogWidget>
   }
 
   void _bottomTap(int value) {
-    _pageController.animateToPage(value,
-        duration: Duration(milliseconds: 300), curve: Curves.ease);
+    _pageController.animateToPage(value, duration: Duration(milliseconds: 300), curve: Curves.ease);
   }
 }

@@ -5,14 +5,14 @@ author: rich <dgsimle@sina.com>
 homepage: https://github.com/flutterplugin/dio_log
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^3.0.0
+  dio: ^4.0.0-prev3 
 
-dev_dependencies:
+dev_dependencies: 
   flutter_test:
     sdk: flutter
 

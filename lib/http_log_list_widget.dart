@@ -21,21 +21,16 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
   Widget build(BuildContext context) {
     logMap = LogPoolManager.getInstance().logMap;
     keys = LogPoolManager.getInstance().keys;
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'request log',
-          style: TextStyle(
-            fontSize: 14.0,
-            color: Color(0xFF4a4a4a),
-            fontWeight: FontWeight.normal,
-          ),
+          'Request Logs',
         ),
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
-        centerTitle: true,
+        backgroundColor: theme.scaffoldBackgroundColor,
         elevation: 1.0,
-        iconTheme: IconThemeData(color: Color(0xFF555555)),
+        iconTheme: theme.iconTheme,
+        textTheme: theme.textTheme,
         actions: <Widget>[
           InkWell(
             onTap: () {
@@ -51,7 +46,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   debugBtnIsShow() ? 'close overlay' : 'open overlay',
-                  style: Style.defTextBold,
+                  style: theme.textTheme.caption.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -66,7 +61,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   'clear',
-                  style: Style.defTextBold,
+                  style: theme.textTheme.caption.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -97,7 +92,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
 
     Color textColor = (item.errOptions != null || resOpt?.statusCode == null)
         ? Colors.red
-        : Colors.black;
+        : Theme.of(context).textTheme.bodyText1.color;
     return Card(
       margin: EdgeInsets.all(8),
       elevation: 6,
