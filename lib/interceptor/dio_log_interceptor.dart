@@ -7,9 +7,9 @@ import '../dio_log.dart';
 
 ///log日志的处理类
 class DioLogInterceptor implements Interceptor {
-  LogPoolManager logManage;
+  LogPoolManager? logManage;
   DioLogInterceptor() {
-    logManage = LogPoolManager.getInstance();
+    logManage = LogPoolManager.getInstance()!;
   }
 
   @override
@@ -18,7 +18,8 @@ class DioLogInterceptor implements Interceptor {
     errOptions.id = err.requestOptions.hashCode;
     errOptions.errorMsg = err.toString();
     //onResponse(err.response);
-    logManage.onError(errOptions);
+    logManage?.onError(errOptions);
+    if (err.response != null) saveResponse(err.response!);
     return handler.next(err);
   }
 
@@ -33,20 +34,22 @@ class DioLogInterceptor implements Interceptor {
     reqOpt.params = options.queryParameters;
     reqOpt.data = options.data;
     reqOpt.headers = options.headers;
-    logManage.onRequest(reqOpt);
+    logManage?.onRequest(reqOpt);
     return handler.next(options);
   }
 
   @override
   Future onResponse(Response response, ResponseInterceptorHandler handler) async {
-    if (response != null) {
-      var resOpt = ResOptions();
-      resOpt.id = response.requestOptions?.hashCode;
-      resOpt.responseTime = DateTime.now();
-      resOpt.statusCode = response.statusCode ?? 0;
-      resOpt.data = response.data;
-      logManage.onResponse(resOpt);
-    }
+    saveResponse(response);
     return handler.next(response);
+  }
+
+  void saveResponse(Response response) {
+    var resOpt = ResOptions();
+    resOpt.id = response.requestOptions.hashCode;
+    resOpt.responseTime = DateTime.now();
+    resOpt.statusCode = response.statusCode ?? 0;
+    resOpt.data = response.data;
+    logManage?.onResponse(resOpt);
   }
 }

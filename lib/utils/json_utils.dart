@@ -6,7 +6,7 @@ toJson(dynamic data) {
   return json;
 }
 
-String map2Json(Map map) {
+String map2Json(Map? map) {
   if (map == null) {
     return '';
   }

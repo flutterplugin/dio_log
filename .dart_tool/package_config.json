@@ -143,10 +143,10 @@
       "name": "dio_log",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-03-25T15:29:16.688971Z",
+  "generated": "2021-03-25T16:34:51.828839Z",
   "generator": "pub",
   "generatorVersion": "2.12.2"
 }
