@@ -12,6 +12,7 @@ class DioLogInterceptor implements Interceptor {
     logManage = LogPoolManager.getInstance()!;
   }
 
+  ///错误数据采集
   @override
   Future onError(DioError err, ErrorInterceptorHandler handler) async {
     var errOptions = ErrOptions();
@@ -23,6 +24,7 @@ class DioLogInterceptor implements Interceptor {
     return handler.next(err);
   }
 
+  ///请求体数据采集
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     var reqOpt = ReqOptions();
@@ -38,6 +40,7 @@ class DioLogInterceptor implements Interceptor {
     return handler.next(options);
   }
 
+  ///响应体数据采集
   @override
   Future onResponse(Response response, ResponseInterceptorHandler handler) async {
     saveResponse(response);

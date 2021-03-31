@@ -1,6 +1,6 @@
 name: dio_log
 description: This plugin can easily help you collect logs of requests. And easy to view the collected logs. Easy debugging in development
-version: 2.0.0-nullsafety.0
+version: 2.0.0
 author: rich <dgsimle@sina.com>
 homepage: https://github.com/flutterplugin/dio_log
 
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^4.0.0-prev3 
+  dio: ^4.0.0
 
 dev_dependencies: 
   flutter_test:

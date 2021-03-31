@@ -8,7 +8,7 @@
 ### 添加依赖
 ```
 dependencies: 
-  dio_log : ^1.3.3
+  dio_log : ^2.0.0
 ```
 ### [github](https://github.com/flutterplugin/dio_log)
 ```

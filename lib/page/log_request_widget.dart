@@ -85,6 +85,7 @@ class _LogRequestWidgetState extends State<LogRequestWidget> with AutomaticKeepA
     );
   }
 
+  ///构建json树的展示
   Widget _buildJsonView(key, json) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -60,6 +60,7 @@ class LogPoolManager {
     }
   }
 
+  ///日志清除
   void clear() {
     logMap.clear();
     keys.clear();

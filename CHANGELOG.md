@@ -1,3 +1,9 @@
+## [v2.0.0] - 2021/03/30
+* Dio 4.0.0 support.
+* Migrated to Flutter 2 and Better Theme support.
+* Migrated to null safety.
+* * to public API add doc comments
+* use ElevatedButton instead of RaisedButton
 ## [v1.3.5] - 2020/09/04
 * ShowDebugBtn on WidgetsBinding.Instance.AddPostFrameCallback callback
 * Adds a body of type FormData According to

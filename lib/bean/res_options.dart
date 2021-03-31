@@ -1,3 +1,4 @@
+///需要的返回数据类
 class ResOptions {
   int? id;
   dynamic data;

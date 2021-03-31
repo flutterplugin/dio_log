@@ -247,6 +247,7 @@ class _JsonViewState extends State<JsonView> {
     );
   }
 
+  ///复制到手机粘贴板
   _copy(value) {
     var snackBar =
         SnackBar(content: Text('"$value"\n\n copy success to clipboard'));

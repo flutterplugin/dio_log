@@ -1,3 +1,4 @@
+///需要的请求数据类
 class ReqOptions {
   int? id;
   String? url;

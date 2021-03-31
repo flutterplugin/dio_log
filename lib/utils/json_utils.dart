@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+///返回json格式的String
 toJson(dynamic data) {
   var je = JsonEncoder.withIndent('  ');
   var json = je.convert(data);
   return json;
 }
 
+///返回json格式的String
 String map2Json(Map? map) {
   if (map == null) {
     return '';

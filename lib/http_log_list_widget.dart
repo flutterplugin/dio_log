@@ -82,6 +82,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
     );
   }
 
+  ///构建请求的简易信息
   Widget _buildItem(NetOptions item) {
     var resOpt = item.resOptions;
     var reqOpt = item.reqOptions!;
