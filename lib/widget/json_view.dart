@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio_log/utils/copy_clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -249,9 +250,7 @@ class _JsonViewState extends State<JsonView> {
 
   ///复制到手机粘贴板
   _copy(value) {
-    var snackBar =
-        SnackBar(content: Text('"$value"\n\n copy success to clipboard'));
-    Scaffold.of(context).showSnackBar(snackBar);
+    copyClipboard(context, '"$value"\n\n copy success to clipboard');
     Clipboard.setData(ClipboardData(text: value?.toString()));
   }
 }

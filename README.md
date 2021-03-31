@@ -8,7 +8,7 @@
 ### 添加依赖
 ```
 dependencies: 
-  dio_log : ^2.0.0
+  dio_log : ^2.0.0-nullsafety.0
 ```
 ### [github](https://github.com/flutterplugin/dio_log)
 ```
@@ -55,3 +55,5 @@ LogPoolManager.getInstance().maxCount = 100;
 
 ### gif demo 
 ![gif](https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/dio_log_example.gif)
+### welcome to add my wechat
+<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/wechat.png" width="200">
