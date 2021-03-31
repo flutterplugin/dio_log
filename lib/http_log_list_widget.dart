@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'bean/net_options.dart';
 import 'dio_log.dart';
 import 'page/log_widget.dart';
-import 'theme/style.dart';
 
 ///网络请求日志列表
 class HttpLogListWidget extends StatefulWidget {
@@ -14,28 +13,23 @@ class HttpLogListWidget extends StatefulWidget {
 }
 
 class _HttpLogListWidgetState extends State<HttpLogListWidget> {
-  LinkedHashMap<String, NetOptions> logMap;
-  List<String> keys;
+  LinkedHashMap<String, NetOptions>? logMap;
+  List<String>? keys;
 
   @override
   Widget build(BuildContext context) {
-    logMap = LogPoolManager.getInstance().logMap;
-    keys = LogPoolManager.getInstance().keys;
+    logMap = LogPoolManager.getInstance()!.logMap;
+    keys = LogPoolManager.getInstance()!.keys;
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'request log',
-          style: TextStyle(
-            fontSize: 14.0,
-            color: Color(0xFF4a4a4a),
-            fontWeight: FontWeight.normal,
-          ),
+          'Request Logs',
         ),
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
-        centerTitle: true,
+        backgroundColor: theme.scaffoldBackgroundColor,
         elevation: 1.0,
-        iconTheme: IconThemeData(color: Color(0xFF555555)),
+        iconTheme: theme.iconTheme,
+        textTheme: theme.textTheme,
         actions: <Widget>[
           InkWell(
             onTap: () {
@@ -51,14 +45,14 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   debugBtnIsShow() ? 'close overlay' : 'open overlay',
-                  style: Style.defTextBold,
+                  style: theme.textTheme.caption!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
           ),
           InkWell(
             onTap: () {
-              LogPoolManager.getInstance().clear();
+              LogPoolManager.getInstance()!.clear();
               setState(() {});
             },
             child: Container(
@@ -66,22 +60,22 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   'clear',
-                  style: Style.defTextBold,
+                  style: theme.textTheme.caption!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
           ),
         ],
       ),
-      body: logMap.length < 1
+      body: logMap!.length < 1
           ? Center(
               child: Text('no request log'),
             )
           : ListView.builder(
               reverse: false,
-              itemCount: keys.length,
+              itemCount: keys!.length,
               itemBuilder: (BuildContext context, int index) {
-                NetOptions item = logMap[keys[index]];
+                NetOptions item = logMap![keys![index]]!;
                 return _buildItem(item);
               },
             ),
@@ -90,14 +84,14 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
 
   Widget _buildItem(NetOptions item) {
     var resOpt = item.resOptions;
-    var reqOpt = item.reqOptions;
+    var reqOpt = item.reqOptions!;
 
     ///格式化请求时间
-    var requestTime = getTimeStr1(reqOpt.requestTime);
+    var requestTime = getTimeStr1(reqOpt.requestTime!);
 
-    Color textColor = (item.errOptions != null || resOpt?.statusCode == null)
+    Color? textColor = (item.errOptions != null || resOpt?.statusCode == null)
         ? Colors.red
-        : Colors.black;
+        : Theme.of(context).textTheme.bodyText1!.color;
     return Card(
       margin: EdgeInsets.all(8),
       elevation: 6,
