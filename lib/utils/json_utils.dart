@@ -8,7 +8,7 @@ toJson(dynamic data) {
 }
 
 ///返回json格式的String
-String map2Json(Map? map) {
+String map2Json(Map map) {
   if (map == null) {
     return '';
   }

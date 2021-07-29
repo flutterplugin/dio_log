@@ -16,11 +16,12 @@ class LogRequestWidget extends StatefulWidget {
   _LogRequestWidgetState createState() => _LogRequestWidgetState();
 }
 
-class _LogRequestWidgetState extends State<LogRequestWidget> with AutomaticKeepAliveClientMixin {
-  late TextEditingController _urlController;
-  late TextEditingController _cookieController;
-  late TextEditingController _paramController;
-  late TextEditingController _bodyController;
+class _LogRequestWidgetState extends State<LogRequestWidget>
+    with AutomaticKeepAliveClientMixin {
+  TextEditingController _urlController;
+  TextEditingController _cookieController;
+  TextEditingController _paramController;
+  TextEditingController _bodyController;
   bool reqFail = false;
   @override
   void initState() {
@@ -43,14 +44,14 @@ class _LogRequestWidgetState extends State<LogRequestWidget> with AutomaticKeepA
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    var reqOpt = widget.netOptions.reqOptions!;
+    var reqOpt = widget.netOptions.reqOptions;
     var resOpt = widget.netOptions.resOptions;
 
     ///格式化请求时间
-    var requestTime = getTimeStr(reqOpt.requestTime!);
+    var requestTime = getTimeStr(reqOpt.requestTime);
 
     ///格式化返回时间
-    var responseTime = getTimeStr(resOpt?.responseTime ?? reqOpt.requestTime!);
+    var responseTime = getTimeStr(resOpt?.responseTime ?? reqOpt.requestTime);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -125,7 +126,7 @@ class _LogRequestWidgetState extends State<LogRequestWidget> with AutomaticKeepA
   @override
   bool get wantKeepAlive => true;
 
-  Map? formDataMap;
+  Map formDataMap;
   Widget _buildParam(dynamic data) {
     if (data is Map) {
       return _buildJsonView('body', data);

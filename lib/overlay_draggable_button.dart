@@ -6,18 +6,18 @@ import 'dio_log.dart';
 /// Created by rich on 2019-07-31
 ///
 
-OverlayEntry? itemEntry;
+OverlayEntry itemEntry;
 
 ///显示全局悬浮调试按钮
-showDebugBtn(BuildContext context, {Widget? button, bool isDelay = true}) {
+showDebugBtn(BuildContext context, {Widget button, bool isDelay = true}) {
   ///widget第一次渲染完成
-  WidgetsBinding.instance!.addPostFrameCallback((_) {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
     dismissDebugBtn();
     itemEntry = OverlayEntry(
         builder: (BuildContext context) => button ?? DraggableButtonWidget());
 
     ///显示悬浮menu
-    Overlay.of(context)?.insert(itemEntry!);
+    Overlay.of(context)?.insert(itemEntry);
   });
 }
 
@@ -34,7 +34,7 @@ bool debugBtnIsShow() {
 
 class DraggableButtonWidget extends StatefulWidget {
   final String title;
-  final Function? onTap;
+  final Function onTap;
   final double btnSize;
 
   DraggableButtonWidget({
@@ -50,8 +50,8 @@ class DraggableButtonWidget extends StatefulWidget {
 class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
   double left = 30;
   double top = 100;
-  late double screenWidth;
-  late double screenHeight;
+  double screenWidth;
+  double screenHeight;
 
   @override
   void initState() {
@@ -75,7 +75,7 @@ class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
     Color primaryColor = Theme.of(context).primaryColor;
     primaryColor = primaryColor.withOpacity(0.6);
     w = GestureDetector(
-      onTap: widget.onTap as void Function()? ?? tap,
+      onTap: widget.onTap as void Function() ?? tap,
       onPanUpdate: _dragUpdate,
       child: Container(
         width: widget.btnSize,

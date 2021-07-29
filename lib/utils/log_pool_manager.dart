@@ -8,20 +8,20 @@ import 'package:dio_log/bean/res_options.dart';
 ///log管理
 class LogPoolManager {
   ///请求日志存储
-  late LinkedHashMap<String, NetOptions> logMap;
+  LinkedHashMap<String, NetOptions> logMap;
 
-  late List<String> keys;
+  List<String> keys;
 
   ///存储请求最大数
   int maxCount = 50;
-  static LogPoolManager? _instance;
+  static LogPoolManager _instance;
 
   LogPoolManager._singleton() {
     logMap = LinkedHashMap();
     keys = <String>[];
   }
 
-  static LogPoolManager? getInstance() {
+  static LogPoolManager getInstance() {
     if (_instance == null) {
       _instance = LogPoolManager._singleton();
     }
@@ -52,8 +52,8 @@ class LogPoolManager {
     var key = response.id.toString();
     if (logMap.containsKey(key)) {
       logMap.update(key, (value) {
-        response.duration = response.responseTime!.millisecondsSinceEpoch -
-            value.reqOptions!.requestTime!.millisecondsSinceEpoch;
+        response.duration = response.responseTime.millisecondsSinceEpoch -
+            value.reqOptions.requestTime.millisecondsSinceEpoch;
         value.resOptions = response;
         return value;
       });

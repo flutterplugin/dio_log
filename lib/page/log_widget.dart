@@ -12,13 +12,14 @@ class LogWidget extends StatefulWidget {
   _LogWidgetState createState() => _LogWidgetState();
 }
 
-class _LogWidgetState extends State<LogWidget> with SingleTickerProviderStateMixin {
+class _LogWidgetState extends State<LogWidget>
+    with SingleTickerProviderStateMixin {
   final List<Tab> tabs = <Tab>[
     new Tab(text: "request"),
     new Tab(text: "response"),
   ];
 
-  PageController? _pageController;
+  PageController _pageController;
 
   int currentIndex = 0;
 
@@ -30,7 +31,7 @@ class _LogWidgetState extends State<LogWidget> with SingleTickerProviderStateMix
 
   @override
   void dispose() {
-    _pageController!.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -40,7 +41,7 @@ class _LogWidgetState extends State<LogWidget> with SingleTickerProviderStateMix
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.netOptions.reqOptions!.url!,
+          widget.netOptions.reqOptions.url,
           style: TextStyle(fontSize: 11),
         ),
         backgroundColor: theme.scaffoldBackgroundColor,
@@ -66,9 +67,12 @@ class _LogWidgetState extends State<LogWidget> with SingleTickerProviderStateMix
         currentIndex: currentIndex,
         onTap: _bottomTap,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.cloud_upload_outlined), label: 'Request'),
-          BottomNavigationBarItem(icon: Icon(Icons.cloud_download_outlined), label: 'Response'),
-          BottomNavigationBarItem(icon: Icon(Icons.error_outline), label: 'Error'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cloud_upload_outlined), label: 'Request'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cloud_download_outlined), label: 'Response'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.error_outline), label: 'Error'),
         ],
       ),
     );
@@ -83,7 +87,7 @@ class _LogWidgetState extends State<LogWidget> with SingleTickerProviderStateMix
   }
 
   void _bottomTap(int value) {
-    _pageController!
-        .animateToPage(value, duration: Duration(milliseconds: 300), curve: Curves.ease);
+    _pageController.animateToPage(value,
+        duration: Duration(milliseconds: 300), curve: Curves.ease);
   }
 }

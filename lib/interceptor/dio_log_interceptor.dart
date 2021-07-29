@@ -7,26 +7,23 @@ import '../dio_log.dart';
 
 ///log日志的处理类
 class DioLogInterceptor implements Interceptor {
-  LogPoolManager? logManage;
+  LogPoolManager logManage;
   DioLogInterceptor() {
-    logManage = LogPoolManager.getInstance()!;
+    logManage = LogPoolManager.getInstance();
   }
 
-  ///错误数据采集
   @override
-  Future onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future onError(DioError err) async {
     var errOptions = ErrOptions();
-    errOptions.id = err.requestOptions.hashCode;
+    errOptions.id = err.request.hashCode;
     errOptions.errorMsg = err.toString();
-    //onResponse(err.response);
-    logManage?.onError(errOptions);
-    if (err.response != null) saveResponse(err.response!);
-    return handler.next(err);
+    onResponse(err.response);
+    logManage.onError(errOptions);
+    return err;
   }
 
-  ///请求体数据采集
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  Future onRequest(RequestOptions options) async {
     var reqOpt = ReqOptions();
     reqOpt.id = options.hashCode;
     reqOpt.url = options.uri.toString();
@@ -36,23 +33,20 @@ class DioLogInterceptor implements Interceptor {
     reqOpt.params = options.queryParameters;
     reqOpt.data = options.data;
     reqOpt.headers = options.headers;
-    logManage?.onRequest(reqOpt);
-    return handler.next(options);
+    logManage.onRequest(reqOpt);
+    return options;
   }
 
-  ///响应体数据采集
   @override
-  Future onResponse(Response response, ResponseInterceptorHandler handler) async {
-    saveResponse(response);
-    return handler.next(response);
-  }
-
-  void saveResponse(Response response) {
-    var resOpt = ResOptions();
-    resOpt.id = response.requestOptions.hashCode;
-    resOpt.responseTime = DateTime.now();
-    resOpt.statusCode = response.statusCode ?? 0;
-    resOpt.data = response.data;
-    logManage?.onResponse(resOpt);
+  Future onResponse(Response response) async {
+    if (response != null) {
+      var resOpt = ResOptions();
+      resOpt.id = response.request?.hashCode;
+      resOpt.responseTime = DateTime.now();
+      resOpt.statusCode = response.statusCode ?? 0;
+      resOpt.data = response.data;
+      logManage.onResponse(resOpt);
+    }
+    return response;
   }
 }

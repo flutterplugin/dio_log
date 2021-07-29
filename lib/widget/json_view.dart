@@ -13,7 +13,7 @@ class JsonView extends StatefulWidget {
   final dynamic json;
 
   ///是否展开全部json
-  final bool? isShowAll;
+  final bool isShowAll;
 
   final double fontSize;
   JsonView({
@@ -27,7 +27,7 @@ class JsonView extends StatefulWidget {
 }
 
 class _JsonViewState extends State<JsonView> {
-  Map<String, bool?> showMap = Map();
+  Map<String, bool> showMap = Map();
 
   ///当前节点编号
   int currentIndex = 0;
@@ -48,7 +48,7 @@ class _JsonViewState extends State<JsonView> {
     if (type == JsonType.object) {
       w = _buildObject(widget.json);
     } else if (type == JsonType.array) {
-      List? list = widget.json as List?;
+      List list = widget.json as List;
       w = _buildArray(list, '');
     } else {
       var je = JsonEncoder.withIndent('  ');
@@ -59,7 +59,7 @@ class _JsonViewState extends State<JsonView> {
   }
 
   ///构建object节点的展示
-  Widget _buildObject(Map<String, dynamic>? json, {String? key}) {
+  Widget _buildObject(Map<String, dynamic> json, {String key}) {
     List<Widget> listW = [];
 
     ///增加一个节点
@@ -77,7 +77,7 @@ class _JsonViewState extends State<JsonView> {
     ///object展示内容
     if (_isShow(currentIndex)) {
       List<Widget> listObj = [];
-      json!.forEach((k, v) {
+      json.forEach((k, v) {
         Widget w;
         JsonType type = getType(v);
         if (type == JsonType.object) {
@@ -111,7 +111,7 @@ class _JsonViewState extends State<JsonView> {
   }
 
   ///构建array节点的展示
-  Widget _buildArray(List? listJ, String key) {
+  Widget _buildArray(List listJ, String key) {
     List<Widget> listW = [];
 
     ///增加一个节点
@@ -133,7 +133,7 @@ class _JsonViewState extends State<JsonView> {
 
     if (_isShow(currentIndex)) {
       List<Widget> listArr = [];
-      listJ!.forEach((val) {
+      listJ.forEach((val) {
         var type = getType(val);
         Widget w;
         if (type == JsonType.object) {
@@ -208,7 +208,7 @@ class _JsonViewState extends State<JsonView> {
   bool _isShow(int key) {
     ///说明是根节点
     if (key == 1) return true;
-    if (widget.isShowAll!) {
+    if (widget.isShowAll) {
       return showMap[key.toString()] ?? true;
     } else {
       return showMap[key.toString()] ?? false;
@@ -218,12 +218,12 @@ class _JsonViewState extends State<JsonView> {
   ///展开合上的切换
   _flexSwitch(String key) {
     showMap.putIfAbsent(key, () => false);
-    showMap[key] = !showMap[key]!;
+    showMap[key] = !showMap[key];
     setState(() {});
   }
 
   ///展开合上所有
-  _flexAll(bool? flex) {
+  _flexAll(bool flex) {
     showMap.forEach((k, v) {
       showMap[k] = flex;
     });
