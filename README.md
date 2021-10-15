@@ -1,21 +1,23 @@
 
 # dio_log
 [![pub package](https://img.shields.io/pub/v/dio_log.svg)](https://pub.dev/packages/dio_log)
-#### http requests log of dio 
-#### 基于dio的网络请求日志
+#### HTTP Inspector tool for Dart which can debugging http requests，Currently, DIO based HTTP capture is implemented
+#### Of course, you can implement an Interceptor instead of a DiologInterceptor to adapt to other HTTP clients
+#### flutter的HTTP检查器工具，可以帮助调试HTTP请求，目前实现了基于dio的http捕获
+#### 当然你可以通过自己实现Interceptor来代替DioLogInterceptor来适配其他Http client
 
 ### Add dependency
 ### 添加依赖
 ```
 dependencies: 
-  dio_log : ^2.0.0-nullsafety.0
+  dio_log : ^2.0.0
 ```
 ### [github](https://github.com/flutterplugin/dio_log)
 ```
 dio_log:
   git:
   url: git@github.com:flutterplugin/dio_log.git
-  ref: develop
+  ref: v2.0.0
 ```
 ### set interceptor of dio
 ### 给dio设置监听
@@ -55,5 +57,5 @@ LogPoolManager.getInstance().maxCount = 100;
 
 ### gif demo 
 ![gif](https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/dio_log_example.gif)
-### welcome to add my wechat
+### welcome to add my WeChat,Hand over a friend
 <img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/wechat.png" width="200">
