@@ -53,6 +53,7 @@ class DioLogInterceptor implements Interceptor {
     resOpt.responseTime = DateTime.now();
     resOpt.statusCode = response.statusCode ?? 0;
     resOpt.data = response.data;
+    resOpt.headers = response.headers.map;
     logManage?.onResponse(resOpt);
   }
 }

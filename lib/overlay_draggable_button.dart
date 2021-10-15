@@ -9,12 +9,11 @@ import 'dio_log.dart';
 OverlayEntry? itemEntry;
 
 ///显示全局悬浮调试按钮
-showDebugBtn(BuildContext context, {Widget? button, bool isDelay = true}) {
+showDebugBtn(BuildContext context, {Widget? button, Color? btnColor}) {
   ///widget第一次渲染完成
   WidgetsBinding.instance!.addPostFrameCallback((_) {
     dismissDebugBtn();
-    itemEntry = OverlayEntry(
-        builder: (BuildContext context) => button ?? DraggableButtonWidget());
+    itemEntry = OverlayEntry(builder: (BuildContext context) => button ?? DraggableButtonWidget(btnColor: btnColor));
 
     ///显示悬浮menu
     Overlay.of(context)?.insert(itemEntry!);
@@ -36,11 +35,13 @@ class DraggableButtonWidget extends StatefulWidget {
   final String title;
   final Function? onTap;
   final double btnSize;
+  final Color? btnColor;
 
   DraggableButtonWidget({
     this.title = 'http log',
     this.onTap,
     this.btnSize = 66,
+    this.btnColor,
   });
 
   @override
@@ -72,7 +73,7 @@ class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
       );
     };
     Widget w;
-    Color primaryColor = Theme.of(context).primaryColor;
+    Color primaryColor = widget.btnColor ?? Theme.of(context).primaryColor;
     primaryColor = primaryColor.withOpacity(0.6);
     w = GestureDetector(
       onTap: widget.onTap as void Function()? ?? tap,

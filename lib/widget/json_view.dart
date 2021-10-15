@@ -190,8 +190,7 @@ class _JsonViewState extends State<JsonView> {
 
   ///构建子节点的展示
   Widget _buildKeyValue(v, {k}) {
-    Widget w = _getDefText(
-        '${k ?? ''}:${v is String ? '"$v"' : v?.toString() ?? null},');
+    Widget w = _getDefText('${k ?? ''}:${v is String ? '"$v"' : v?.toString() ?? null},');
     if (k != null) {
       w = GestureDetector(
         behavior: HitTestBehavior.translucent,

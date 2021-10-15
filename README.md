@@ -10,14 +10,14 @@
 ### 添加依赖
 ```
 dependencies: 
-  dio_log : ^2.0.0
+  dio_log : ^2.0.1
 ```
 ### [github](https://github.com/flutterplugin/dio_log)
 ```
 dio_log:
   git:
   url: git@github.com:flutterplugin/dio_log.git
-  ref: v2.0.0
+  ref: v2.0.1
 ```
 ### set interceptor of dio
 ### 给dio设置监听
@@ -28,7 +28,7 @@ dio.interceptors.add(DioLogInterceptor());
 ### 在你的主页面添加全局的悬浮按钮，用于跳转日志列表
 ```
 ///display overlay button 显示悬浮按钮
-showDebugBtn(context);
+showDebugBtn(context,btnColor: Colors.blue);
 ///cancel overlay button 取消悬浮按钮
 dismissDebugBtn();
 ///overlay button state of display 悬浮按钮展示状态

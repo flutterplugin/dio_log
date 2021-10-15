@@ -1,3 +1,6 @@
+## [v2.0.1] - 2021/10/15
+* response add headers
+* overlay_draggable_button can set the color
 ## [v2.0.0] - 2021/04/01
 * stable version
 * Happy April Fools' Day

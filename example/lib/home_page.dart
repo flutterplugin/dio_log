@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    showDebugBtn(context);
+    showDebugBtn(context, btnColor: Colors.blue);
     controller.text = url;
   }
 

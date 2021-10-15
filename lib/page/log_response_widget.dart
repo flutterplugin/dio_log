@@ -25,12 +25,6 @@ class _LogResponseWidgetState extends State<LogResponseWidget> with AutomaticKee
       children: <Widget>[
         Row(
           children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                copyClipboard(context, toJson(json));
-              },
-              child: Text('copy json'),
-            ),
             SizedBox(width: 10),
             Text(isShowAll ? 'shrink all' : 'expand all'),
             Switch(
@@ -61,13 +55,36 @@ class _LogResponseWidgetState extends State<LogResponseWidget> with AutomaticKee
             color: Colors.red,
           ),
         ),
+        _buildJsonView('headers:', response?.headers),
+        _buildJsonView('response.data:', json),
+      ],
+    ));
+  }
+
+  ///构建json树的展示
+  Widget _buildJsonView(key, json) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        ElevatedButton(
+          onPressed: () {
+            copyClipboard(context, toJson(json));
+          },
+          child: Text('copy json'),
+        ),
+        Text(
+          '$key',
+          style: TextStyle(
+            fontSize: fontSize,
+          ),
+        ),
         JsonView(
           json: json,
           isShowAll: isShowAll,
           fontSize: fontSize,
         ),
       ],
-    ));
+    );
   }
 
   @override

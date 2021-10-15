@@ -1,6 +1,6 @@
 name: dio_log
 description: HTTP Inspector tool for Dart which can debugging http requests，Currently, DIO based HTTP capture is implemented.
-version: 2.0.0
+version: 2.0.1
 homepage: https://github.com/flutterplugin/dio_log
 
 environment:

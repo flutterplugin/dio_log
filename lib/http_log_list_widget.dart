@@ -36,7 +36,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               if (debugBtnIsShow()) {
                 dismissDebugBtn();
               } else {
-                showDebugBtn(context, isDelay: false);
+                showDebugBtn(context);
               }
               setState(() {});
             },
