@@ -12,7 +12,8 @@ class LogResponseWidget extends StatefulWidget {
   _LogResponseWidgetState createState() => _LogResponseWidgetState();
 }
 
-class _LogResponseWidgetState extends State<LogResponseWidget> with AutomaticKeepAliveClientMixin {
+class _LogResponseWidgetState extends State<LogResponseWidget>
+    with AutomaticKeepAliveClientMixin {
   bool isShowAll = false;
   double fontSize = 14;
   @override

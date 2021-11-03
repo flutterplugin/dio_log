@@ -1,3 +1,6 @@
+## [v2.0.2] - 2021/10/15
+* fix copy Clipboard error
+* Response header values can be copied
 ## [v2.0.1] - 2021/10/15
 * response add headers
 * overlay_draggable_button can set the color

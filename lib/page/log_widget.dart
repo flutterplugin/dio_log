@@ -12,7 +12,8 @@ class LogWidget extends StatefulWidget {
   _LogWidgetState createState() => _LogWidgetState();
 }
 
-class _LogWidgetState extends State<LogWidget> with SingleTickerProviderStateMixin {
+class _LogWidgetState extends State<LogWidget>
+    with SingleTickerProviderStateMixin {
   final List<Tab> tabs = <Tab>[
     new Tab(text: "request"),
     new Tab(text: "response"),
@@ -66,9 +67,12 @@ class _LogWidgetState extends State<LogWidget> with SingleTickerProviderStateMix
         currentIndex: currentIndex,
         onTap: _bottomTap,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.cloud_upload_outlined), label: 'Request'),
-          BottomNavigationBarItem(icon: Icon(Icons.cloud_download_outlined), label: 'Response'),
-          BottomNavigationBarItem(icon: Icon(Icons.error_outline), label: 'Error'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cloud_upload_outlined), label: 'Request'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cloud_download_outlined), label: 'Response'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.error_outline), label: 'Error'),
         ],
       ),
     );
@@ -83,7 +87,7 @@ class _LogWidgetState extends State<LogWidget> with SingleTickerProviderStateMix
   }
 
   void _bottomTap(int value) {
-    _pageController!
-        .animateToPage(value, duration: Duration(milliseconds: 300), curve: Curves.ease);
+    _pageController!.animateToPage(value,
+        duration: Duration(milliseconds: 300), curve: Curves.ease);
   }
 }

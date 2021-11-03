@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio_log/utils/copy_clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 ///
 /// Created by rich on 2019-07-17
@@ -129,7 +128,13 @@ class _JsonViewState extends State<JsonView> {
 
     ///添加key的点击事件
     ///添加key的展示
-    listW.add(_wrapFlex(currentIndex, keyW));
+    listW.add(GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onLongPress: () {
+        _copy(listJ.toString());
+      },
+      child: _wrapFlex(currentIndex, keyW),
+    ));
 
     if (_isShow(currentIndex)) {
       List<Widget> listArr = [];
@@ -190,7 +195,8 @@ class _JsonViewState extends State<JsonView> {
 
   ///构建子节点的展示
   Widget _buildKeyValue(v, {k}) {
-    Widget w = _getDefText('${k ?? ''}:${v is String ? '"$v"' : v?.toString() ?? null},');
+    Widget w = _getDefText(
+        '${k ?? ''}:${v is String ? '"$v"' : v?.toString() ?? null},');
     if (k != null) {
       w = GestureDetector(
         behavior: HitTestBehavior.translucent,
@@ -249,8 +255,7 @@ class _JsonViewState extends State<JsonView> {
 
   ///复制到手机粘贴板
   _copy(value) {
-    copyClipboard(context, '"$value"\n\n copy success to clipboard');
-    Clipboard.setData(ClipboardData(text: value?.toString()));
+    copyClipboard(context, value);
   }
 }
 

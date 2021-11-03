@@ -45,7 +45,8 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   debugBtnIsShow() ? 'close overlay' : 'open overlay',
-                  style: theme.textTheme.caption!.copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.caption!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -60,7 +61,8 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   'clear',
-                  style: theme.textTheme.caption!.copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.caption!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),

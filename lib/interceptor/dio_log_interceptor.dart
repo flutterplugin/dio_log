@@ -42,7 +42,8 @@ class DioLogInterceptor implements Interceptor {
 
   ///响应体数据采集
   @override
-  Future onResponse(Response response, ResponseInterceptorHandler handler) async {
+  Future onResponse(
+      Response response, ResponseInterceptorHandler handler) async {
     saveResponse(response);
     return handler.next(response);
   }
