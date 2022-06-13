@@ -10,14 +10,14 @@
 ### 添加依赖
 ```
 dependencies: 
-  dio_log : ^2.0.2
+  dio_log : ^2.0.3
 ```
 ### [github](https://github.com/flutterplugin/dio_log)
 ```
 dio_log:
   git:
   url: git@github.com:flutterplugin/dio_log.git
-  ref: v2.0.2
+  ref: v2.0.3
 ```
 ### set interceptor of dio
 ### 给dio设置监听
@@ -48,6 +48,8 @@ Navigator.of(context).push(
 ```
 /// Sets the maximum number of entries for logging 设置记录日志的最大条数
 LogPoolManager.getInstance().maxCount = 100;
+///Add the isError method implementation to LogPoolManager so that request messages defined as errors are displayed in red font
+LogPoolManager.getInstance().isError = (res) => res.resOptions==null;
 ```
 
 ### Screenshot 

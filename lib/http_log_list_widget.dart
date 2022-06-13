@@ -29,7 +29,6 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
         backgroundColor: theme.scaffoldBackgroundColor,
         elevation: 1.0,
         iconTheme: theme.iconTheme,
-        textTheme: theme.textTheme,
         actions: <Widget>[
           InkWell(
             onTap: () {
@@ -90,9 +89,8 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
     ///格式化请求时间
     var requestTime = getTimeStr1(reqOpt.requestTime!);
 
-    Color? textColor = (item.errOptions != null || resOpt?.statusCode == null)
-        ? Colors.red
-        : Theme.of(context).textTheme.bodyText1!.color;
+    Color? textColor =
+        LogPoolManager.getInstance().isError(item) ? Colors.red : Theme.of(context).textTheme.bodyText1!.color;
     return Card(
       margin: EdgeInsets.all(8),
       elevation: 6,

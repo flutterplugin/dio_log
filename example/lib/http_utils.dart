@@ -5,6 +5,7 @@ Dio dio = Dio();
 
 initHttp() {
   dio.interceptors.add(DioLogInterceptor());
+  // LogPoolManager.getInstance().isError = (res) => res.resOptions==null;
 }
 
 httpGet(String url) {

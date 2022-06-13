@@ -13,3 +13,6 @@ class NetOptions {
     this.errOptions,
   });
 }
+
+///判断返回数据是否异常
+typedef ResError = bool Function(NetOptions res);

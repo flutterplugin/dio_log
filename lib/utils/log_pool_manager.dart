@@ -14,6 +14,9 @@ class LogPoolManager {
 
   ///存储请求最大数
   int maxCount = 50;
+
+  ResError isError = (res) => res.errOptions != null || res.resOptions?.statusCode == null;
+
   static LogPoolManager? _instance;
 
   LogPoolManager._singleton() {

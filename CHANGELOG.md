@@ -1,3 +1,6 @@
+## [v2.0.3] - 2021/10/15
+* fix flutter 3.0 warning of WidgetsBinding
+* Add the isError method implementation to LogPoolManager so that request messages defined as errors are displayed in red font
 ## [v2.0.2] - 2021/10/15
 * fix copy Clipboard error
 * Response header values can be copied

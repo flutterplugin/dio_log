@@ -11,11 +11,9 @@ OverlayEntry? itemEntry;
 ///显示全局悬浮调试按钮
 showDebugBtn(BuildContext context, {Widget? button, Color? btnColor}) {
   ///widget第一次渲染完成
-  WidgetsBinding.instance!.addPostFrameCallback((_) {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
     dismissDebugBtn();
-    itemEntry = OverlayEntry(
-        builder: (BuildContext context) =>
-            button ?? DraggableButtonWidget(btnColor: btnColor));
+    itemEntry = OverlayEntry(builder: (BuildContext context) => button ?? DraggableButtonWidget(btnColor: btnColor));
 
     ///显示悬浮menu
     Overlay.of(context)?.insert(itemEntry!);
