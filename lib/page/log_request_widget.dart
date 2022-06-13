@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:dio_log/bean/net_options.dart';
-import 'package:dio_log/utils/copy_clipboard.dart';
 import 'package:flutter/material.dart';
 
 import '../dio_log.dart';
@@ -16,8 +15,7 @@ class LogRequestWidget extends StatefulWidget {
   _LogRequestWidgetState createState() => _LogRequestWidgetState();
 }
 
-class _LogRequestWidgetState extends State<LogRequestWidget>
-    with AutomaticKeepAliveClientMixin {
+class _LogRequestWidgetState extends State<LogRequestWidget> with AutomaticKeepAliveClientMixin {
   late TextEditingController _urlController;
   late TextEditingController _cookieController;
   late TextEditingController _paramController;
@@ -131,7 +129,9 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
     if (data is Map) {
       return _buildJsonView('body', data);
     } else if (data is FormData) {
-      formDataMap = Map()..addEntries(data.fields)..addEntries(data.files);
+      formDataMap = Map()
+        ..addEntries(data.fields)
+        ..addEntries(data.files);
       return _getDefText('formData:${map2Json(formDataMap)}');
     } else if (data is String) {
       try {

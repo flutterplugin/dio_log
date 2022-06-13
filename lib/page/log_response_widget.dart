@@ -1,6 +1,5 @@
 import 'package:dio_log/bean/net_options.dart';
 import 'package:dio_log/dio_log.dart';
-import 'package:dio_log/widget/json_view.dart';
 import 'package:flutter/material.dart';
 
 class LogResponseWidget extends StatefulWidget {
@@ -12,8 +11,7 @@ class LogResponseWidget extends StatefulWidget {
   _LogResponseWidgetState createState() => _LogResponseWidgetState();
 }
 
-class _LogResponseWidgetState extends State<LogResponseWidget>
-    with AutomaticKeepAliveClientMixin {
+class _LogResponseWidgetState extends State<LogResponseWidget> with AutomaticKeepAliveClientMixin {
   bool isShowAll = false;
   double fontSize = 14;
   @override
