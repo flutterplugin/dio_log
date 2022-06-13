@@ -21,11 +21,11 @@ class LogPoolManager {
     keys = <String>[];
   }
 
-  static LogPoolManager? getInstance() {
+  static LogPoolManager getInstance() {
     if (_instance == null) {
       _instance = LogPoolManager._singleton();
     }
-    return _instance;
+    return _instance!;
   }
 
   void onError(ErrOptions err) {
@@ -52,8 +52,8 @@ class LogPoolManager {
     var key = response.id.toString();
     if (logMap.containsKey(key)) {
       logMap.update(key, (value) {
-        response.duration = response.responseTime!.millisecondsSinceEpoch -
-            value.reqOptions!.requestTime!.millisecondsSinceEpoch;
+        response.duration =
+            response.responseTime!.millisecondsSinceEpoch - value.reqOptions!.requestTime!.millisecondsSinceEpoch;
         value.resOptions = response;
         return value;
       });

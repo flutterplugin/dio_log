@@ -132,7 +132,7 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
       return _buildJsonView('body', data);
     } else if (data is FormData) {
       formDataMap = Map()..addEntries(data.fields)..addEntries(data.files);
-      return _getDefText('formdata:${map2Json(formDataMap)}');
+      return _getDefText('formData:${map2Json(formDataMap)}');
     } else if (data is String) {
       try {
         var decodedMap = json.decode(data);
@@ -147,7 +147,7 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
 
   String dataFormat(dynamic data) {
     if (data is FormData) {
-      return 'formdata:${map2Json(formDataMap)}';
+      return 'formData:${map2Json(formDataMap)}';
     } else {
       return 'body:${toJson(data)}';
     }

@@ -18,8 +18,8 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    logMap = LogPoolManager.getInstance()!.logMap;
-    keys = LogPoolManager.getInstance()!.keys;
+    logMap = LogPoolManager.getInstance().logMap;
+    keys = LogPoolManager.getInstance().keys;
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -45,15 +45,14 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   debugBtnIsShow() ? 'close overlay' : 'open overlay',
-                  style: theme.textTheme.caption!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.caption!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
           ),
           InkWell(
             onTap: () {
-              LogPoolManager.getInstance()!.clear();
+              LogPoolManager.getInstance().clear();
               setState(() {});
             },
             child: Container(
@@ -61,8 +60,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   'clear',
-                  style: theme.textTheme.caption!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.caption!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
