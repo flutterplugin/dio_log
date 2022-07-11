@@ -44,7 +44,8 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   debugBtnIsShow() ? 'close overlay' : 'open overlay',
-                  style: theme.textTheme.caption!.copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.caption!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -59,7 +60,8 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               child: Align(
                 child: Text(
                   'clear',
-                  style: theme.textTheme.caption!.copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.caption!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -89,8 +91,9 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
     ///格式化请求时间
     var requestTime = getTimeStr1(reqOpt.requestTime!);
 
-    Color? textColor =
-        LogPoolManager.getInstance().isError(item) ? Colors.red : Theme.of(context).textTheme.bodyText1!.color;
+    Color? textColor = LogPoolManager.getInstance().isError(item)
+        ? Colors.red
+        : Theme.of(context).textTheme.bodyText1!.color;
     return Card(
       margin: EdgeInsets.all(8),
       elevation: 6,

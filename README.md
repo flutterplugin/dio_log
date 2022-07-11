@@ -50,6 +50,8 @@ Navigator.of(context).push(
 LogPoolManager.getInstance().maxCount = 100;
 ///Add the isError method implementation to LogPoolManager so that request messages defined as errors are displayed in red font
 LogPoolManager.getInstance().isError = (res) => res.resOptions==null;
+///Disabling Log Printing
+DioLogInterceptor.enablePrintLog = false;
 ```
 
 ### Screenshot 

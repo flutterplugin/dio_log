@@ -15,7 +15,8 @@ class LogRequestWidget extends StatefulWidget {
   _LogRequestWidgetState createState() => _LogRequestWidgetState();
 }
 
-class _LogRequestWidgetState extends State<LogRequestWidget> with AutomaticKeepAliveClientMixin {
+class _LogRequestWidgetState extends State<LogRequestWidget>
+    with AutomaticKeepAliveClientMixin {
   late TextEditingController _urlController;
   late TextEditingController _cookieController;
   late TextEditingController _paramController;

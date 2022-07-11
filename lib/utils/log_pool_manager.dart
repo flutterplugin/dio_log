@@ -15,7 +15,8 @@ class LogPoolManager {
   ///存储请求最大数
   int maxCount = 50;
 
-  ResError isError = (res) => res.errOptions != null || res.resOptions?.statusCode == null;
+  ResError isError =
+      (res) => res.errOptions != null || res.resOptions?.statusCode == null;
 
   static LogPoolManager? _instance;
 
@@ -55,8 +56,8 @@ class LogPoolManager {
     var key = response.id.toString();
     if (logMap.containsKey(key)) {
       logMap.update(key, (value) {
-        response.duration =
-            response.responseTime!.millisecondsSinceEpoch - value.reqOptions!.requestTime!.millisecondsSinceEpoch;
+        response.duration = response.responseTime!.millisecondsSinceEpoch -
+            value.reqOptions!.requestTime!.millisecondsSinceEpoch;
         value.resOptions = response;
         return value;
       });

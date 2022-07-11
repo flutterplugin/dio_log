@@ -9,15 +9,18 @@ import 'dio_log.dart';
 OverlayEntry? itemEntry;
 
 ///显示全局悬浮调试按钮
-showDebugBtn(BuildContext context, {Widget? button, Color? btnColor}) {
+showDebugBtn(BuildContext context, {Widget? button, Color? btnColor}) async {
   ///widget第一次渲染完成
-  WidgetsBinding.instance.addPostFrameCallback((_) {
+  try {
+    await Future.delayed(Duration(milliseconds: 500));
     dismissDebugBtn();
-    itemEntry = OverlayEntry(builder: (BuildContext context) => button ?? DraggableButtonWidget(btnColor: btnColor));
+    itemEntry = OverlayEntry(
+        builder: (BuildContext context) =>
+            button ?? DraggableButtonWidget(btnColor: btnColor));
 
     ///显示悬浮menu
     Overlay.of(context)?.insert(itemEntry!);
-  });
+  } catch (e) {}
 }
 
 ///关闭悬浮按钮
