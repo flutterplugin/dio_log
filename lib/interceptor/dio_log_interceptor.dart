@@ -3,8 +3,9 @@ import 'package:dio_log/bean/err_options.dart';
 import 'package:dio_log/bean/net_options.dart';
 import 'package:dio_log/bean/req_options.dart';
 import 'package:dio_log/bean/res_options.dart';
-
+import 'dart:developer';
 import '../dio_log.dart';
+import 'package:flutter/foundation.dart';
 
 ///log日志的处理类
 class DioLogInterceptor implements Interceptor {
@@ -62,14 +63,14 @@ class DioLogInterceptor implements Interceptor {
     resOpt.headers = response.headers.map;
     logManage?.onResponse(resOpt);
     if (enablePrintLog) {
-      NetOptions log =
+      NetOptions logNp =
           LogPoolManager.getInstance().logMap[resOpt.id.toString()]!;
-      print('dio_log: request: url:${log.reqOptions?.url}');
-      print('dio_log: request: method:${log.reqOptions?.method}');
-      print('dio_log: request: params:${log.reqOptions?.params}');
-      print(
-          'dio_log: request: duration:${getTimeStr1(log.reqOptions!.requestTime!)}');
-      print('dio_log: response: ${toJson(log.resOptions?.data)}');
+      log('request: url:${logNp.reqOptions?.url}');
+      log('request: method:${logNp.reqOptions?.method}');
+      log('request: params:${logNp.reqOptions?.params}');
+      log('request: data:${logNp.reqOptions?.data}');
+      log('request: duration:${getTimeStr1(logNp.reqOptions!.requestTime!)}');
+      log('response: ${toJson(logNp.resOptions?.data)}');
     }
   }
 }
