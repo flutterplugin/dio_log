@@ -27,7 +27,7 @@ class ReqOptions {
     headers?.forEach((key, value) {
       cmd.addAll(['-H', '"$key: $value"']);
     });
-    if (data != null) cmd.addAll(['-d', jsonEncode(data)]);
+    if (data != null) cmd.addAll(['-d', '${jsonEncode(data)}']);
     cmd.add(url ?? '');
     return cmd.join(' ');
   }
