@@ -3,6 +3,8 @@ import 'package:dio_log/bean/err_options.dart';
 import 'package:dio_log/bean/net_options.dart';
 import 'package:dio_log/bean/req_options.dart';
 import 'package:dio_log/bean/res_options.dart';
+// import 'package:flutter/material.dart' show debugPrint;
+import 'dart:developer';
 
 import '../dio_log.dart';
 
@@ -62,14 +64,14 @@ class DioLogInterceptor implements Interceptor {
     resOpt.headers = response.headers.map;
     logManage?.onResponse(resOpt);
     if (enablePrintLog) {
-      NetOptions log =
-          LogPoolManager.getInstance().logMap[resOpt.id.toString()]!;
-      print('dio_log: request: url:${log.reqOptions?.url}');
-      print('dio_log: request: method:${log.reqOptions?.method}');
-      print('dio_log: request: params:${log.reqOptions?.params}');
-      print(
-          'dio_log: request: duration:${getTimeStr1(log.reqOptions!.requestTime!)}');
-      print('dio_log: response: ${toJson(log.resOptions?.data)}');
+      NetOptions opt = LogPoolManager.getInstance().logMap[resOpt.id.toString()]!;
+      log('dio_log_request: duration:${getTimeStr1(opt.reqOptions!.requestTime!)}');
+      log('dio_log_request: url:${opt.reqOptions?.url}');
+      log('dio_log_request: method:${opt.reqOptions?.method}');
+      log('dio_log_request: headers:${opt.reqOptions?.headers}');
+      log('dio_log_request: params:${opt.reqOptions?.params}');
+      log('dio_log_request: data:${opt.reqOptions?.data}');
+      log('dio_log_response: ${toJson(opt.resOptions?.data)}');
     }
   }
 }
