@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:dio_log/bean/net_options.dart';
 import 'package:flutter/material.dart';
+
+import 'package:dio_log/bean/net_options.dart';
 
 import '../dio_log.dart';
 
@@ -17,29 +18,6 @@ class LogRequestWidget extends StatefulWidget {
 
 class _LogRequestWidgetState extends State<LogRequestWidget>
     with AutomaticKeepAliveClientMixin {
-  late TextEditingController _urlController;
-  late TextEditingController _cookieController;
-  late TextEditingController _paramController;
-  late TextEditingController _bodyController;
-  bool reqFail = false;
-  @override
-  void initState() {
-    _urlController = TextEditingController();
-    _cookieController = TextEditingController();
-    _paramController = TextEditingController();
-    _bodyController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _bodyController.dispose();
-    _paramController.dispose();
-    _urlController.dispose();
-    _cookieController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -61,15 +39,26 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
               'Tip: long press a key to copy the value to the clipboard',
               style: TextStyle(fontSize: 10, color: Colors.red),
             ),
-            ElevatedButton(
-              onPressed: () {
-                copyClipboard(
-                    context,
-                    'url:${reqOpt.url}\nmethod:${reqOpt.method}\nrequestTime:$requestTime\nresponseTime:$responseTime\n'
-                    'duration:${resOpt?.duration ?? 0}ms\n${dataFormat(reqOpt.data)}'
-                    '\nparams:${toJson(reqOpt.params)}\nheader:${reqOpt.headers}');
-              },
-              child: Text('copy all'),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    copyClipboard(
+                        context,
+                        'url:${reqOpt.url}\nmethod:${reqOpt.method}\nrequestTime:$requestTime\nresponseTime:$responseTime\n'
+                        'duration:${resOpt?.duration ?? 0}ms\n${dataFormat(reqOpt.data)}'
+                        '\nparams:${toJson(reqOpt.params)}\nheader:${reqOpt.headers}');
+                  },
+                  child: Text('copy all'),
+                ),
+                SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {
+                    copyClipboard(context, reqOpt.cURL);
+                  },
+                  child: Text('copy cURL'),
+                ),
+              ],
             ),
             _buildKeyValue('url', reqOpt.url),
             _buildKeyValue('method', reqOpt.method),

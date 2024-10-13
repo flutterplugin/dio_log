@@ -6,3 +6,5 @@ workspace.xml
 .dart_tool
 .fvm
 .vscode
+.DS_Store
+.dart_tool

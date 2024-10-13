@@ -30,8 +30,8 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
         elevation: 1.0,
         iconTheme: theme.iconTheme,
         actions: <Widget>[
-          InkWell(
-            onTap: () {
+          FilledButton(
+            onPressed: () {
               if (debugBtnIsShow()) {
                 dismissDebugBtn();
               } else {
@@ -39,32 +39,16 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
               }
               setState(() {});
             },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Align(
-                child: Text(
-                  debugBtnIsShow() ? 'close overlay' : 'open overlay',
-                  style: theme.textTheme.caption!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
+            child: Text(
+              debugBtnIsShow() ? 'close overlay' : 'open overlay',
             ),
           ),
-          InkWell(
-            onTap: () {
+          FilledButton(
+            onPressed: () {
               LogPoolManager.getInstance().clear();
               setState(() {});
             },
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Align(
-                child: Text(
-                  'clear',
-                  style: theme.textTheme.caption!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
+            child: Text('clear'),
           ),
         ],
       ),
@@ -93,7 +77,8 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
 
     Color? textColor = LogPoolManager.getInstance().isError(item)
         ? Colors.red
-        : Theme.of(context).textTheme.bodyText1!.color;
+        : Theme.of(context).textTheme.bodyMedium!.color;
+
     return Card(
       margin: EdgeInsets.all(8),
       elevation: 6,

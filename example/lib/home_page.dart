@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'http_utils.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -26,6 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
+    controller.dispose();
     super.dispose();
   }
 
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'enter the requesr you want to send and press the send button',
+              'enter the request you want to send and press the send button',
             ),
             TextField(
               controller: controller,
