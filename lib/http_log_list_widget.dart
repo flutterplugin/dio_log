@@ -66,7 +66,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
           ),
         ],
       ),
-      body: logMap!.length < 1
+      body: logMap?.isEmpty??true
           ? Center(
               child: Text('no request log'),
             )
