@@ -1,9 +1,11 @@
+## [v2.0.5] - 2023/08/22
+* Dio 5.0.0 support.
 ## [v2.0.4] - 2022/07/11
 * remove WidgetsBinding.instance.addPostFrameCallback was replaced by await Future.delayed(Duration(milliseconds: 500));
-## [v2.0.3] - 2021/06/13
+## [v2.0.3] - 2022/06/13
 * fix flutter 3.0 warning of WidgetsBinding
 * Add the isError method implementation to LogPoolManager so that request messages defined as errors are displayed in red font
-## [v2.0.2] - 2021/03/22
+## [v2.0.2] - 2022/03/22
 * fix copy Clipboard error
 * Response header values can be copied
 ## [v2.0.1] - 2021/10/15
