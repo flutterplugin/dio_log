@@ -1,4 +1,4 @@
-## [v5.3.0] - 2023/08/22
+## [v5.3.0] - 2024/05/22
 * Dio 5.3.0 support.
 * Synchronize the tag of the project with the tag of the Dio library.
 ## [v2.0.5] - 2023/08/22
