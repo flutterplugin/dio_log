@@ -5,7 +5,6 @@ import 'package:dio_log/bean/req_options.dart';
 import 'package:dio_log/bean/res_options.dart';
 import 'dart:developer';
 import '../dio_log.dart';
-import 'package:flutter/foundation.dart';
 
 ///log日志的处理类
 class DioLogInterceptor implements Interceptor {
@@ -20,7 +19,7 @@ class DioLogInterceptor implements Interceptor {
 
   ///错误数据采集
   @override
-  Future onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future onError(DioException err, ErrorInterceptorHandler handler) async {
     var errOptions = ErrOptions();
     errOptions.id = err.requestOptions.hashCode;
     errOptions.errorMsg = err.toString();
