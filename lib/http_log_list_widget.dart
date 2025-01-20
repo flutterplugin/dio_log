@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:dio_log/widget/input_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'bean/net_options.dart';
@@ -15,21 +16,73 @@ class HttpLogListWidget extends StatefulWidget {
 class _HttpLogListWidgetState extends State<HttpLogListWidget> {
   LinkedHashMap<String, NetOptions>? logMap;
   List<String>? keys;
-
+  SearchModel? searchModel;
   @override
   Widget build(BuildContext context) {
     logMap = LogPoolManager.getInstance().logMap;
-    keys = LogPoolManager.getInstance().keys;
+    if (searchModel != null) {
+      keys = LogPoolManager.getInstance().keys.where((element) {
+        var model = logMap![element]!;
+        var req = model.reqOptions;
+        var urlValid = req!.url!.contains(searchModel!.url);
+        var res = model.resOptions;
+        var statusValid;
+        if (searchModel?.status == 0) {
+          statusValid = true;
+        } else {
+          statusValid = res?.statusCode == searchModel?.status;
+        }
+        var isError = LogPoolManager.getInstance().isError(model);
+        var duration = searchModel?.duration ?? 0;
+        var durationType = searchModel?.durationType ?? 0;
+        var isDuration = true;
+        if (durationType == 0) {
+          isDuration = (model.resOptions?.duration ?? 0) > duration;
+        }
+        if (durationType == 1) {
+          isDuration = (model.resOptions?.duration ?? 0) < duration;
+        }
+        return urlValid && statusValid && isError == searchModel?.isError && isDuration;
+      }).toList();
+    } else {
+      keys = LogPoolManager.getInstance().keys;
+    }
+
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Request Logs',
+          'Logs',
+          style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
         ),
         backgroundColor: theme.scaffoldBackgroundColor,
         elevation: 1.0,
         iconTheme: theme.iconTheme,
         actions: <Widget>[
+          InkWell(
+            onTap: () async {
+              searchModel = SearchModel.noCondition();
+              setState(() {});
+              snackBar(context, 'show All Logs');
+            },
+            child: Align(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'show All',
+                  style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () async {
+              searchModel = await showInputDialog(context);
+              setState(() {});
+              snackBar(context, 'Filtered by condition');
+            },
+            child: Icon(Icons.search),
+          ),
           InkWell(
             onTap: () {
               if (debugBtnIsShow()) {
@@ -53,6 +106,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
             onTap: () {
               LogPoolManager.getInstance().clear();
               setState(() {});
+              snackBar(context, 'clear Logs');
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 8),
@@ -66,7 +120,7 @@ class _HttpLogListWidgetState extends State<HttpLogListWidget> {
           ),
         ],
       ),
-      body: logMap?.isEmpty??true
+      body: logMap?.isEmpty ?? true
           ? Center(
               child: Text('no request log'),
             )

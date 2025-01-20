@@ -15,8 +15,7 @@ class LogRequestWidget extends StatefulWidget {
   _LogRequestWidgetState createState() => _LogRequestWidgetState();
 }
 
-class _LogRequestWidgetState extends State<LogRequestWidget>
-    with AutomaticKeepAliveClientMixin {
+class _LogRequestWidgetState extends State<LogRequestWidget> with AutomaticKeepAliveClientMixin {
   late TextEditingController _urlController;
   late TextEditingController _cookieController;
   late TextEditingController _paramController;
@@ -61,15 +60,26 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
               'Tip: long press a key to copy the value to the clipboard',
               style: TextStyle(fontSize: 10, color: Colors.red),
             ),
-            ElevatedButton(
-              onPressed: () {
-                copyClipboard(
-                    context,
-                    'url:${reqOpt.url}\nmethod:${reqOpt.method}\nrequestTime:$requestTime\nresponseTime:$responseTime\n'
-                    'duration:${resOpt?.duration ?? 0}ms\n${dataFormat(reqOpt.data)}'
-                    '\nparams:${toJson(reqOpt.params)}\nheader:${reqOpt.headers}');
-              },
-              child: Text('copy all'),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    copyClipboard(
+                        context,
+                        'url:${reqOpt.url}\nmethod:${reqOpt.method}\nrequestTime:$requestTime\nresponseTime:$responseTime\n'
+                        'duration:${resOpt?.duration ?? 0}ms\n${dataFormat(reqOpt.data)}'
+                        '\nparams:${toJson(reqOpt.params)}\nheader:${reqOpt.headers}');
+                  },
+                  child: Text('copy all'),
+                ),
+                SizedBox(width: 12),
+                ElevatedButton(
+                  onPressed: () {
+                    copyClipboard(context, 'url:${reqOpt.url}');
+                  },
+                  child: Text('copy url'),
+                ),
+              ],
             ),
             _buildKeyValue('url', reqOpt.url),
             _buildKeyValue('method', reqOpt.method),
@@ -115,11 +125,8 @@ class _LogRequestWidgetState extends State<LogRequestWidget>
   }
 
   ///默认的文本大小
-  Text _getDefText(String str) {
-    return Text(
-      str,
-      style: TextStyle(fontSize: 15),
-    );
+  Widget _getDefText(String str) {
+    return SelectableText(str, style: TextStyle(fontSize: 15));
   }
 
   @override

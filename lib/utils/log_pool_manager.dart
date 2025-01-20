@@ -13,7 +13,7 @@ class LogPoolManager {
   late List<String> keys;
 
   ///存储请求最大数
-  int maxCount = 50;
+  int maxCount = 200;
 
   ResError isError =
       (res) => res.errOptions != null || res.resOptions?.statusCode == null;

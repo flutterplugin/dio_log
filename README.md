@@ -61,5 +61,3 @@ DioLogInterceptor.enablePrintLog = false;
 
 ### gif demo 
 ![gif](https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/dio_log_example.gif)
-### welcome to add my WeChat,Hand over a friend
-<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/wechat.png" width="200">

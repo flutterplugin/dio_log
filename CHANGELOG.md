@@ -1,3 +1,6 @@
+## [v5.3.0+1] - 2025/01/20
+* add logs filter function.
+* LogPoolManager.maxCount from 50 to 200.
 ## [v5.3.0] - 2024/05/22
 * Dio 5.3.0 support.
 * Synchronize the tag of the project with the tag of the Dio library.

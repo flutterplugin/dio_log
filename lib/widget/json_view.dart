@@ -246,7 +246,7 @@ class _JsonViewState extends State<JsonView> {
   }
 
   ///默认的文本大小
-  Text _getDefText(String str) {
+  Widget _getDefText(String str) {
     return Text(
       str,
       style: TextStyle(fontSize: widget.fontSize),
