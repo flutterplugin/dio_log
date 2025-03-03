@@ -58,6 +58,7 @@ DioLogInterceptor.enablePrintLog = false;
 <img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_list.jpg" width="200">      
 <img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_request.jpg" width="200">
 <img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_response.jpg" width="200">
+<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_filter.jpg" width="200">
 
 ### gif demo 
 ![gif](https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/dio_log_example.gif)
