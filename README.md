@@ -1,12 +1,11 @@
 # dio_log
 [![pub package](https://img.shields.io/pub/v/dio_log.svg)](https://pub.dev/packages/dio_log)
 
-[English](README.md) | [中文](README_zh.md)
+[English](./README.md) | [中文](./README_zh.md)
 
 ## Description
 HTTP Inspector tool for Dart which can debugging http requests. Currently, DIO based HTTP capture is implemented.
 Of course, you can implement an Interceptor instead of a DiologInterceptor to adapt to other HTTP clients.
-<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_filter.jpg" height="500px">
 ## Installation
 Add this to your package's `pubspec.yaml` file:
 ```yaml
