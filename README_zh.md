@@ -3,34 +3,34 @@
 
 [English](README.md) | [中文](README_zh.md)
 
-## Description
-HTTP Inspector tool for Dart which can debugging http requests. Currently, DIO based HTTP capture is implemented.
-Of course, you can implement an Interceptor instead of a DiologInterceptor to adapt to other HTTP clients.
-<img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_filter.jpg" height="500px">
-## Installation
-Add this to your package's `pubspec.yaml` file:
+## 描述
+这是一个用于 Dart 的 HTTP 检查器工具，可以帮助调试 HTTP 请求。目前实现了基于 dio 的 http 捕获功能。
+当然，您可以通过自己实现 Interceptor 来代替 DioLogInterceptor 以适配其他 Http client。
+
+## 安装
+在您的 `pubspec.yaml` 文件中添加：
 ```yaml
 dependencies:
   dio_log: 5.3.0+1
 ```
 
-## Usage
-1. Set interceptor of dio:
+## 使用方法
+1. 给 dio 设置拦截器：
 ```dart
 dio.interceptors.add(DioLogInterceptor());
 ```
 
-2. Add a global hover button on your home page:
+2. 在主页面添加全局悬浮按钮：
 ```dart
-// Display overlay button
+// 显示悬浮按钮
 showDebugBtn(context, btnColor: Colors.blue);
-// Cancel overlay button
+// 取消悬浮按钮
 dismissDebugBtn();
-// Check overlay button state
+// 检查悬浮按钮显示状态
 debugBtnIsShow()
 ```
 
-3. Or open log list manually:
+3. 或者在需要的地方手动打开日志列表：
 ```dart
 Navigator.of(context).push(
   MaterialPageRoute(
@@ -39,21 +39,21 @@ Navigator.of(context).push(
 );
 ```
 
-## Configuration
+## 配置选项
 ```dart
-// Sets the maximum number of entries for logging
+// 设置记录日志的最大条数
 LogPoolManager.getInstance().maxCount = 100;
-// Add custom error detection
+// 添加自定义错误检测
 LogPoolManager.getInstance().isError = (res) => res.resOptions==null;
-// Disable Log Printing
+// 禁用日志打印
 DioLogInterceptor.enablePrintLog = false;
 ```
 
-## Screenshots
+## 截图展示
 <img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_list.jpg" width="200">      
 <img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_request.jpg" width="200">
 <img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_response.jpg" width="200">
 <img src="https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/log_filter.jpg" width="200">
 
-## Demo
-![gif](https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/dio_log_example.gif)
+## 演示
+![gif](https://raw.githubusercontent.com/flutterplugin/dio_log/develop/images/dio_log_example.gif) 
