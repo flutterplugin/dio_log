@@ -10,6 +10,10 @@ OverlayEntry? itemEntry;
 
 ///显示全局悬浮调试按钮
 showDebugBtn(BuildContext context, {Widget? button, Color? btnColor}) async {
+  bool hasShowed = debugBtnIsShow();
+  if (hasShowed) {
+    return;
+  }
   ///widget第一次渲染完成
   try {
     await Future.delayed(Duration(milliseconds: 500));
